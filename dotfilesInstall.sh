@@ -12,6 +12,7 @@ git config --global diff.algorithm 'histogram'
 git config --global alias.l 'log --graph --all --date=short --date-order --format="%C(yellow)%h%C(reset) %C(magenta)[%ad]%C(reset)%C(auto)%d%C(reset) %s %C(cyan)@%an%C(reset)"'
 ln -snf ~/dotfiles/.zsh ~/.zsh
 ln -sf ~/dotfiles/.vimrc ~/.vimrc
+ln -sf ~/dotfiles/.gvimrc ~/.gvimrc
 ln -snf ~/dotfiles/.vim ~/.vim
 
 if [ `uname` = 'Darwin' ]; then
