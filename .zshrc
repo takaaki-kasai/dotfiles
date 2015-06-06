@@ -1,4 +1,4 @@
-# vim:set ts=4 sts=4 sw=4:
+# vim:set ts=4 sts=4 sw=4 ft=zsh:
 # .zshrc is sourced in interactive shells.
 # It should contain commands to set up aliases,
 # functions, options, key bindings, etc.
@@ -27,9 +27,20 @@ bindkey '^N' history-beginning-search-forward # 先頭マッチのヒストリ�
 autoload -U colors    # 機能の読み込み
 colors                # 機能の実行
 
-if [ -x `which dircolors` ] && [ -e $HOME/.dir_colors ]; then
-    eval `dircolors $HOME/.dir_colors`
-fi
+case "${OSTYPE}" in
+    darwin*)
+        # Mac
+        export LSCOLORS=exfxcxdxbxegedabagacad
+        export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+        ;;
+    linux*)
+        # Linux
+        if [ -x `which dircolors` ] && [ -e $HOME/.dir_colors ]; then
+            eval `dircolors $HOME/.dir_colors`
+        fi
+        ;;
+esac
+
 # 補完リストをカラー化
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
@@ -170,14 +181,31 @@ export PATH="$PATH:$HOME/bin"
 
 
 ### set alias ############################################################
-alias ls="ls -hF --color=auto"
-alias la="ls -hAF --color=auto"
-alias ll="ls -lhAF --color=auto"
 alias rm="rm -i"
 alias cp="cp -i"
 alias mv="mv -i"
 alias crontab="crontab -i"
-alias diff=colordiff
+case "${OSTYPE}" in
+    darwin*)
+        # Mac
+        alias ls="ls -hFG"
+        alias la="ls -hAFG"
+        alias ll="ls -lhAFG"
+        if [ -d /Applications/MacVim.app ]; then
+            alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+            alias vimdiff='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/vimdiff "$@"'
+        fi
+        ;;
+    linux*)
+        # Linux
+        alias ls="ls -hF --color=auto"
+        alias la="ls -hAF --color=auto"
+        alias ll="ls -lhAF --color=auto"
+        if [ -x `which colordiff` ]; then
+            alias diff=colordiff
+        fi
+        ;;
+esac
 
 
 ### 環境変数 ############################################################
@@ -189,6 +217,8 @@ export LESS='-g -j10 -R -Q'
 
 ### アプリケーション固有設定 ############################################################
 # for rbenv
-export RBENV_ROOT="/usr/local/rbenv"
-export PATH="$RBENV_ROOT/bin:$PATH"
-eval "$(rbenv init --no-rehash -)"
+if [ -d /usr/local/rbenv ]; then
+    export RBENV_ROOT="/usr/local/rbenv"
+    export PATH="$RBENV_ROOT/bin:$PATH"
+    eval "$(rbenv init --no-rehash -)"
+fi
