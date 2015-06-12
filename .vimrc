@@ -298,6 +298,10 @@ set fileformats=unix,dos,mac
 " PHPでswitch() ブロック内の 'case:' と 'default:' をインデントさせる
 let g:PHP_vintage_case_default_indent = 1
 
+" Markdown用
+" 単語の中にあるアンダースコアはハイライトしない
+autocmd Syntax markdown syntax match markdownIgnore /\%([^ \t_]\)\@<=_\%([^ \t_]\)\@=/
+
 " NeoBundle -----------------------------------------------------------------
 set nocompatible               " be iMproved
 filetype off                   " required!
