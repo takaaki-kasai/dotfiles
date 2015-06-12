@@ -297,6 +297,8 @@ set fileformats=unix,dos,mac
 " PHP用の設定（参照 :help php-indent）
 " PHPでswitch() ブロック内の 'case:' と 'default:' をインデントさせる
 let g:PHP_vintage_case_default_indent = 1
+" メソッド呼び出しの -> の最初のハイフンが単語と認識されないようにハイフンは除外
+autocmd FileType php setlocal iskeyword-=-
 
 " Markdown用
 " 単語の中にあるアンダースコアはハイライトしない
