@@ -300,10 +300,6 @@ let g:PHP_vintage_case_default_indent = 1
 " メソッド呼び出しの -> の最初のハイフンが単語と認識されないようにハイフンは除外
 autocmd FileType php setlocal iskeyword-=-
 
-" Markdown用
-" 単語の中にあるアンダースコアはハイライトしない
-autocmd Syntax markdown syntax match markdownIgnore /\%([^ \t_]\)\@<=_\%([^ \t_]\)\@=/
-
 " NeoBundle -----------------------------------------------------------------
 set nocompatible               " be iMproved
 filetype off                   " required!
@@ -337,6 +333,7 @@ NeoBundle 'vim-scripts/diffchar.vim'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'cohama/agit.vim'
 NeoBundle 'thinca/vim-qfreplace'
+NeoBundle 'gabrielelana/vim-markdown'
 
 call neobundle#end()
 
@@ -545,3 +542,6 @@ function! MyQfCurrentLineFilePreview(grep_pattern)
   highlight CursorLineNr ctermfg=228
   highlight CursorLine ctermbg=236
 endfunction
+
+" vim-markdown -----------------------------------------------------------------
+let g:markdown_enable_spell_checking = 0
