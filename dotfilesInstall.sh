@@ -15,6 +15,8 @@ ln -snf ~/dotfiles/.zsh ~/.zsh
 ln -sf ~/dotfiles/.vimrc ~/.vimrc
 ln -sf ~/dotfiles/.gvimrc ~/.gvimrc
 ln -snf ~/dotfiles/.vim ~/.vim
+ln -sf ~/dotfiles/.dir_colors ~/.dir_colors
+ln -sf ~/dotfiles/.colordiffrc ~/.colordiffrc
 
 if [ `uname` = 'Darwin' ]; then
   #mac用のコード
