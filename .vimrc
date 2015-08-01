@@ -503,10 +503,12 @@ function! MyGrep(...)
   endif
   execute "nnoremap <silent> <buffer> p :call MyQfCurrentLineFilePreview('" . l:grep_pattern_vim . "')<CR>"
   execute 'nnoremap <buffer> s :QFDo %S/' . l:grep_pattern_vim . '/'
+  execute 'vnoremap <buffer> s y:QFDo %S/<C-R>"/'
   execute 'only'
   execute 'setlocal previewheight=' . winheight(0) / 2
   setlocal nowinfixheight
   nnoremap <buffer> h h
+  nnoremap <buffer> v v
   nnoremap <buffer> e :QFDo<Space>
   nnoremap <silent> <buffer> q :tabclose<CR>
   nnoremap <silent> <buffer> <Plug>(my:set-hlsearch) :set hlsearch<CR>
