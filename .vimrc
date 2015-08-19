@@ -329,7 +329,7 @@ NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'tyru/caw.vim.git'
-NeoBundle 'vim-scripts/diffchar.vim'
+NeoBundle 'vim-scripts/diffchar.vim', {'rev': '5.1'}
 NeoBundle 'rking/ag.vim'
 NeoBundle 'cohama/agit.vim'
 NeoBundle 'thinca/vim-qfreplace'
