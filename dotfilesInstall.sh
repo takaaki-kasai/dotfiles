@@ -17,6 +17,7 @@ ln -sf ~/dotfiles/.gvimrc ~/.gvimrc
 ln -snf ~/dotfiles/.vim ~/.vim
 ln -sf ~/dotfiles/.dir_colors ~/.dir_colors
 ln -sf ~/dotfiles/.colordiffrc ~/.colordiffrc
+ln -sf ~/dotfiles/.screenrc ~/.screenrc
 mkdir -p ~/bin
 ln -sf ~/dotfiles/bin/git-diff-normal-format ~/bin/git-diff-normal-format
 
