@@ -68,6 +68,7 @@ set noundofile                   " アンドゥファイル(~un)を作らない�
 set showcmd                      " 入力中のコマンドをステータスに表示する
 set modelines=5                  " モードラインを認識可能な先頭・末尾の行数範囲
 set laststatus=2                 " ステータスラインを常に表示
+set wildignorecase               " ファイル名の補完時に大文字小文字を区別しない
 " set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=\ (%l/%L,%c-%v)%8P     " ステータスラインに文字コードと改行文字を表示する
 
 autocmd FileType * setlocal iskeyword+=-       " 単語の一部として認識させたい文字を追加
