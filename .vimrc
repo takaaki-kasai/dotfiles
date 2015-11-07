@@ -116,7 +116,9 @@ autocmd InsertLeave * set nopaste
 vnoremap $ $h
 
 " 折り返しの切り替え
-noremap <silent> <Leader>w :call MyToggleWrap()<CR>
+if !&diff
+  noremap <silent> <Leader>w :call MyToggleWrap()<CR>
+end
 function! MyToggleWrap()
   if &wrap
     echo 'Wrap OFF'
@@ -171,26 +173,45 @@ nnoremap <C-W><Space> <C-W>=
 " ビープ音すべてを無効にする
 set visualbell t_vb=
 
-" vimdiffの時にホワイトスペースを無視する
-set diffopt+=iwhite
+" diffの時にホワイトスペースを無視するかどうか
+" diffchar.vim 利用時 diffopt の iwhite がオンだと単語単位の差分表示がずれるので独自定義
+let g:my_diff_ignore_whitespace = 0
 
 " diffのコマンド
 set diffexpr=MyDiff()
 function! MyDiff()
   let l:opt = ''
-  if &diffopt =~ 'iwhite'
-    let l:opt = l:opt . '-b '
+  if g:my_diff_ignore_whitespace
+    let l:opt = l:opt . '-w '
   endif
   silent execute '!git-diff-normal-format ' . l:opt . v:fname_in . ' ' . v:fname_new . ' > ' . v:fname_out
   redraw!
 endfunction
 
-" vimdiffで起動した際自動的に単語単位のdiff(diffchar.vim)を有効にする
+" diffの時にホワイトスペースを無視するかどうか切り替える関数
+function! MyToggleDiffIgnoreWhiteSpace()
+  if g:my_diff_ignore_whitespace
+    let g:my_diff_ignore_whitespace = 0
+    let l:msg = 'Not Ignore Whitespace'
+  else
+    let g:my_diff_ignore_whitespace = 1
+    let l:msg = 'Ignore Whitespace'
+  endif
+
+  diffupdate
+  call feedkeys("\<Plug>ToggleDiffCharAllLines\<Plug>ToggleDiffCharAllLines")  " 画面表示更新のため2回
+  call feedkeys(":echo '" . l:msg . "'\<CR>")
+endfunction
+
+" vimdiffで起動した際の設定
 if &diff
+  " 自動的に単語単位のdiff(diffchar.vim)を有効にする
   augroup enable_diffchar
     autocmd!
     autocmd VimEnter * execute '%SDChar'
   augroup END
+  " ホワイトスペースを無視するかどうか切り替える
+  noremap <silent> <Leader>w :call MyToggleDiffIgnoreWhiteSpace()<CR>
 endif
 
 " QuickFix の各ファイルに対して何かを実行するコマンド
@@ -330,7 +351,7 @@ NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'tyru/caw.vim.git'
-NeoBundle 'vim-scripts/diffchar.vim', {'rev': '5.1'}
+NeoBundle 'vim-scripts/diffchar.vim'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'cohama/agit.vim'
 NeoBundle 'thinca/vim-qfreplace'

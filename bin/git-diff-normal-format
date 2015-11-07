@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 iwhite = ''
-if (ARGV[0] == '-b')
+if (ARGV[0] == '-w')
   iwhite = ARGV.shift.dup << ' '
 end
 

@@ -222,3 +222,7 @@ if [ -d /usr/local/rbenv ]; then
     export PATH="$RBENV_ROOT/bin:$PATH"
     eval "$(rbenv init --no-rehash -)"
 fi
+
+# for nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
