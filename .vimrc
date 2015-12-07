@@ -205,11 +205,11 @@ endfunction
 
 " vimdiffで起動した際の設定
 if &diff
-  " 自動的に単語単位のdiff(diffchar.vim)を有効にする
-  augroup enable_diffchar
-    autocmd!
-    autocmd VimEnter * execute '%SDChar'
-  augroup END
+  " 自動的に単語単位のdiff(diffchar.vim)を有効にする -> Ver5.5でg:DiffModeSyncが導入されて不要に
+  " augroup enable_diffchar
+  "   autocmd!
+  "   autocmd VimEnter * execute '%SDChar'
+  " augroup END
   " ホワイトスペースを無視するかどうか切り替える
   noremap <silent> <Leader>w :call MyToggleDiffIgnoreWhiteSpace()<CR>
 endif
@@ -504,7 +504,7 @@ let g:caw_i_skip_blank_line = 1
 
 " diffchar.vim -----------------------------------------------------------------
 let g:DiffUnit = 'Word1'
-let g:DiffUpdate = 1
+" let g:DiffUpdate = 1  " Ver5.5からデフォルトで有効になった
 
 " ag.vim -----------------------------------------------------------------
 command! -nargs=+ -complete=file MyGrep call MyGrep(<f-args>)
