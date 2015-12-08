@@ -356,6 +356,7 @@ NeoBundle 'rking/ag.vim'
 NeoBundle 'cohama/agit.vim'
 NeoBundle 'thinca/vim-qfreplace'
 NeoBundle 'gabrielelana/vim-markdown'
+NeoBundle 'vim-scripts/AnsiEsc.vim'
 
 call neobundle#end()
 
