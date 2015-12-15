@@ -492,9 +492,12 @@ let g:unite_force_overwrite_statusline = 0
 nnoremap <silent> <Leader>f :VimFiler<CR>
 
 " syntastic -----------------------------------------------------------------
+" let g:syntastic_debug = 32
+" let g:syntastic_debug_file = '~/syntastic.log'
 let g:syntastic_mode_map = { 'mode': 'active',
       \ 'active_filetypes': [],
       \ 'passive_filetypes': ['rst'] }
+let g:syntastic_ruby_checkers = ['rubocop']
 let g:syntastic_eruby_ruby_quiet_messages = {
       \ 'regex': '\m^possibly useless use of a \(constant\|variable\) in void context' }
 

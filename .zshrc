@@ -176,8 +176,7 @@ preexec () {
 #export PATH="/sbin:$PATH"
 #export PATH="/usr/sbin:$PATH"
 #export PATH="/usr/local/bin:$PATH"
-#export PATH="$HOME/bin:$PATH"
-export PATH="$PATH:$HOME/bin"
+export PATH="$HOME/bin:$PATH"
 
 
 ### set alias ############################################################

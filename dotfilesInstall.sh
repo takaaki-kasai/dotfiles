@@ -21,6 +21,7 @@ ln -sf ~/dotfiles/.colordiffrc ~/.colordiffrc
 ln -sf ~/dotfiles/.screenrc ~/.screenrc
 mkdir -p ~/bin
 ln -sf ~/dotfiles/bin/git-diff-normal-format ~/bin/git-diff-normal-format
+ln -sf ~/dotfiles/bin/rubocop ~/bin/rubocop
 
 if [ `uname` = 'Darwin' ]; then
   #mac用のコード
