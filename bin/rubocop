@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ $1 == '--version' ]; then
+if [ $# -eq 1 ] && [ $1 = '--version' ]; then
   /usr/local/bin/rubocop --version 2> /dev/null
 else
   /usr/local/bin/rubocop $@
