@@ -9,6 +9,7 @@ git config user.email "$EMAIL_USER$EMAIL_ATMARK$EMAIL_DOMAIN"
 
 cd ~
 git config --global diff.algorithm 'histogram'
+git config --global core.whitespace trailing-space,tab-in-indent
 git config --global alias.l 'log --graph --all --date=short --date-order --format="%C(yellow)%h%C(reset) %C(magenta)[%ad]%C(reset)%C(auto)%d%C(reset) %s %C(cyan)@%an%C(reset)"'
 git config --global alias.lb 'log --graph --date=short --date-order --format="%C(yellow)%h%C(reset) %C(magenta)[%ad]%C(reset)%C(auto)%d%C(reset) %s %C(cyan)@%an%C(reset)"'
 ln -sf ~/dotfiles/.zshrc ~/.zshrc
