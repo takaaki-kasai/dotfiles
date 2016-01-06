@@ -12,6 +12,8 @@ git config --global diff.algorithm 'histogram'
 git config --global core.whitespace trailing-space,tab-in-indent
 git config --global alias.l 'log --graph --all --date=short --date-order --format="%C(yellow)%h%C(reset) %C(magenta)[%ad]%C(reset)%C(auto)%d%C(reset) %s %C(cyan)@%an%C(reset)"'
 git config --global alias.lb 'log --graph --date=short --date-order --format="%C(yellow)%h%C(reset) %C(magenta)[%ad]%C(reset)%C(auto)%d%C(reset) %s %C(cyan)@%an%C(reset)"'
+git config --global alias.pushall '!f(){ for i in `git remote`; do git push $i $1; done; };f'
+git config --global alias.fetchall '!f(){ for i in `git remote`; do git fetch $i; done; };f'
 ln -sf ~/dotfiles/.zshrc ~/.zshrc
 ln -snf ~/dotfiles/.zsh ~/.zsh
 ln -sf ~/dotfiles/.vimrc ~/.vimrc
