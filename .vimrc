@@ -571,5 +571,8 @@ function! MyQfCurrentLineFilePreview(grep_pattern)
   highlight CursorLine ctermbg=236
 endfunction
 
+" agit -----------------------------------------------------------------
+let g:agit_stat_width = 130
+
 " vim-markdown -----------------------------------------------------------------
 let g:markdown_enable_spell_checking = 0
