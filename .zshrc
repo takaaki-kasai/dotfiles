@@ -208,6 +208,7 @@ case "${OSTYPE}" in
         ;;
 esac
 
+alias tiga="tig --all"
 
 ### 環境変数 ############################################################
 #export JAVA_HOME=/usr/java/latest

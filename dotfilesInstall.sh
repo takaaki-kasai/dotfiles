@@ -23,6 +23,8 @@ ln -snf ~/dotfiles/.vim ~/.vim
 ln -sf ~/dotfiles/.dir_colors ~/.dir_colors
 ln -sf ~/dotfiles/.colordiffrc ~/.colordiffrc
 ln -sf ~/dotfiles/.screenrc ~/.screenrc
+ln -sf ~/dotfiles/.tigrc ~/.tigrc
+ln -sf ~/dotfiles/.tigrc.vim ~/.tigrc.vim
 mkdir -p ~/bin
 ln -sf ~/dotfiles/bin/git-diff-normal-format ~/bin/git-diff-normal-format
 ln -sf ~/dotfiles/bin/rubocop ~/bin/rubocop

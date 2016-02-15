@@ -1,0 +1,10 @@
+# 公式で用意されているVim風のプリセットを読み込む
+source ~/.tigrc.vim
+
+# <C-f>,<C-b>でページ移動
+bind generic <Ctrl-f> scroll-page-down
+bind generic <Ctrl-b> scroll-page-up
+
+# タイプ別のリファレンスの表示形式。スペース区切りで指定
+# set reference-format = [branch] <tag> {remote} ~replace~
+set reference-format = [branch] [->head] <tag> <(local-tag)> {remote} {->tracked-remote} ~replace~
