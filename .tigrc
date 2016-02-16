@@ -1,9 +1,10 @@
 # 公式で用意されているVim風のプリセットを読み込む
 source ~/.tigrc.vim
 
-# <C-f>,<C-b>でページ移動
+# generic なキーバインド
 bind generic <Ctrl-f> scroll-page-down
 bind generic <Ctrl-b> scroll-page-up
+bind generic ca !?git commit --amend
 
 # main view のキーバインド
 bind generic F none
