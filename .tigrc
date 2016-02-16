@@ -4,16 +4,16 @@ source ~/.tigrc.vim
 # generic なキーバインド
 bind generic <Ctrl-f> scroll-page-down
 bind generic <Ctrl-b> scroll-page-up
-bind generic ca !?git commit --amend
+bind generic ca !?sh -c "echo 'Amending previous commit...'; git commit --amend"
 
 # main view のキーバインド
 bind generic F none
-bind main F !git fetchall
-bind main P !?git pushall %(branch)
-bind main C !?git checkout %(branch)
-bind main M !?git merge --ff-only %(commit)
-bind main BB !?git rebase %(commit)
-bind main BI !?git rebase -i %(commit)
+bind main F !sh -c "echo 'Fetching...'; git fetchall"
+bind main P !?sh -c "echo 'Pushing...'; git pushall %(branch)"
+bind main C !@?git checkout %(branch)
+bind main M !@?git merge --ff-only %(commit)
+bind main BB !?sh -c "echo 'Starting rebase...'; git rebase %(commit)"
+bind main BI !?sh -c "echo 'Starting interactive rebase...'; git rebase -i %(commit)"
 
 # refs view のキーバインド
 bind refs M !?git merge %(ref)
