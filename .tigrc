@@ -10,6 +10,7 @@ bind generic F none
 bind main F !git fetchall
 bind main P !?git pushall %(branch)
 bind main C !?git checkout %(branch)
+bind main M !?git merge --ff-only %(commit)
 bind main BB !?git rebase %(commit)
 bind main BI !?git rebase -i %(commit)
 
