@@ -5,6 +5,20 @@ source ~/.tigrc.vim
 bind generic <Ctrl-f> scroll-page-down
 bind generic <Ctrl-b> scroll-page-up
 
+# main view のキーバインド
+bind generic F none
+bind main F !git fetchall
+bind main P !?git pushall %(branch)
+bind main C !?git checkout %(branch)
+bind main BB !?git rebase %(commit)
+bind main BI !?git rebase -i %(commit)
+
+# refs view のキーバインド
+bind refs M !?git merge %(ref)
+
+# status view のキーバインド
+bind status ap !git add -p
+
 # タイプ別のリファレンスの表示形式。スペース区切りで指定
 # set reference-format = [branch] <tag> {remote} ~replace~
 set reference-format = [branch] [->head] <tag> <(local-tag)> {remote} {->tracked-remote} ~replace~
@@ -17,3 +31,6 @@ set line-graphics = utf-8
 
 # コミットの並び順
 # set commit-order = date
+
+# 描画更新のタイミング
+# set refresh-mode = after-command
