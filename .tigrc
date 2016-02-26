@@ -21,6 +21,8 @@ bind main BI !?sh -c "echo 'Starting interactive rebase...'; git rebase -i %(com
 bind main di :!git diff HEAD..%(commit)
 bind main dl :!git diff --name-status HEAD..%(commit)
 bind main dt !git difftool HEAD..%(commit)
+bind main ds !git difftool --cached
+bind main du !git difftool
 bind main yy !@git stash
 bind main yp !@git stash pop
 
@@ -40,6 +42,9 @@ set main-view-id = yes,width=8
 
 # コミットグラフのタイプを指定
 set line-graphics = utf-8
+
+# git diff のオプションを指定
+set diff-options = -M100%
 
 # コミットの並び順
 # set commit-order = date
