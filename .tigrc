@@ -2,8 +2,6 @@
 source ~/.tigrc.vim
 
 # generic なキーバインド
-bind generic <Ctrl-f> scroll-page-down
-bind generic <Ctrl-b> scroll-page-up
 bind generic ca !?sh -c "echo 'Amending previous commit...'; git commit --amend"
 bind generic d none
 bind generic dd view-diff
