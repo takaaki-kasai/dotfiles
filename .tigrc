@@ -20,6 +20,7 @@ bind main BB !@?git rebase %(commit)
 bind main BI !?sh -c "echo 'Starting interactive rebase...'; git rebase -i %(commit)"
 bind main di :!git diff HEAD..%(commit)
 bind main dl :!git diff --name-status HEAD..%(commit)
+bind main dL :!git diff --name-status %(commit)..HEAD
 bind main dt !git difftool HEAD..%(commit)
 bind main ds !git difftool --cached
 bind main du !git difftool
