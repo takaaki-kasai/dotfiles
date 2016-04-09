@@ -28,6 +28,7 @@ ln -sf ~/dotfiles/.tigrc.vim ~/.tigrc.vim
 mkdir -p ~/bin
 ln -sf ~/dotfiles/bin/git-diff-normal-format ~/bin/git-diff-normal-format
 ln -sf ~/dotfiles/bin/rubocop ~/bin/rubocop
+ln -sf ~/dotfiles/.karabiner/private.xml ~/Library/Application\ Support/Karabiner/private.xml
 
 if [ `uname` = 'Darwin' ]; then
   #mac用のコード

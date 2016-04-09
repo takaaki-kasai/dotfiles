@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<root>
+  <item>
+    <name>Private</name>
+    <item>
+      <name>Change MiddleClick and MouseButton4</name>
+      <appendix>MouseButton4 to Dashboard</appendix>
+      <appendix>(Simultaneous)MiddleClick and LeftClick to Launchpad</appendix>
+      <appendix>(Simultaneous)MiddleClick and RightClick to Ctrl+Right</appendix>
+      <appendix>(Simultaneous)MouseButton4 and LeftClick to Ctrl+Left</appendix>
+      <appendix>(Simultaneous)MouseButton4 and RightClick to Show Desktop</appendix>
+      <identifier>private.change_middle_click_mouse_button4</identifier>
+      <autogen>
+        __PointingButtonToKey__
+        PointingButton::BUTTON4,
+        KeyCode::DASHBOARD
+      </autogen>
+      <autogen>
+        __SimultaneousKeyPresses__
+        PointingButton::MIDDLE, PointingButton::LEFT,
+        KeyCode::LAUNCHPAD
+      </autogen>
+      <autogen>
+        __SimultaneousKeyPresses__
+        PointingButton::MIDDLE, PointingButton::RIGHT,
+        KeyCode::CURSOR_RIGHT, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_CONTROL
+      </autogen>
+      <autogen>
+        __SimultaneousKeyPresses__
+        PointingButton::BUTTON4, PointingButton::LEFT,
+        KeyCode::CURSOR_LEFT, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_CONTROL
+      </autogen>
+      <autogen>
+        __SimultaneousKeyPresses__
+        PointingButton::BUTTON4, PointingButton::RIGHT,
+        KeyCode::MISSION_CONTROL, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_COMMAND
+      </autogen>
+    </item>
+
+    <item>
+      <name>Change ScrollWheel</name>
+      <appendix>Ctrl+ScrollWheel Up to Ctrl+Left</appendix>
+      <appendix>Ctrl+ScrollWheel Down to Ctrl+Right</appendix>
+      <identifier>private.change_scrollwheel</identifier>
+      <autogen>
+        __ScrollWheelToKey__ ScrollWheel::UP, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_CONTROL,
+        KeyCode::CURSOR_LEFT, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_CONTROL
+      </autogen>
+      <autogen>
+        __ScrollWheelToKey__ ScrollWheel::DOWN, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_CONTROL,
+        KeyCode::CURSOR_RIGHT, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_CONTROL
+      </autogen>
+    </item>
+
+    <item>
+      <name>Change ScrollWheel (Except in Screen Sharing)</name>
+      <appendix>ScrollWheel Up to Application Expose</appendix>
+      <appendix>ScrollWheel Down to Mission Control</appendix>
+      <identifier>private.change_scrollwheel_except_in_screen_sharing</identifier>
+      <not>SCREEN_SHARING</not>
+      <autogen>
+        __ScrollWheelToKey__ ScrollWheel::UP,
+        KeyCode::MISSION_CONTROL, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_CONTROL
+      </autogen>
+      <autogen>
+        __ScrollWheelToKey__ ScrollWheel::DOWN,
+        KeyCode::MISSION_CONTROL
+      </autogen>
+    </item>
+
+    <item>
+      <name>Change ScrollWheel (Only in Screen Sharing)</name>
+      <appendix>ScrollWheel Up to Ctrl+Down</appendix>
+      <appendix>ScrollWheel Down to Ctrl+Up</appendix>
+      <identifier>private.change_scrollwheel_only_in_screen_sharing</identifier>
+      <only>SCREEN_SHARING</only>
+      <autogen>
+        __ScrollWheelToKey__ ScrollWheel::UP,
+        KeyCode::CURSOR_DOWN, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_CONTROL
+      </autogen>
+      <autogen>
+        __ScrollWheelToKey__ ScrollWheel::DOWN,
+        KeyCode::CURSOR_UP, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_CONTROL
+      </autogen>
+    </item>
+
+    <item>
+      <name>Drag and Drop via Simultaneous LeftClick &amp; RightClick</name>
+      <appendix>(Simultaneous) LeftClick &amp; RightClick to Start Drag</appendix>
+      <appendix>(Simultaneous) LeftClick &amp; RightClick to Drop</appendix>
+      <identifier>private.drag_drop_simultanious_left_right_click</identifier>
+      <autogen>
+        __SimultaneousKeyPresses__
+        PointingButton::LEFT, PointingButton::RIGHT,
+        KeyCode::VK_MOUSEKEY_LOCK_BUTTON_LEFT
+      </autogen>
+    </item>
+
+    <item>
+      <name>MiddleClick toggles CursorMove to ScrollWheel</name>
+      <identifier>private.middle_click_tootles_cursor_move_to_scroll_wheel</identifier>
+      <autogen>
+        __PointingButtonToKey__
+        PointingButton::MIDDLE,
+        KeyCode::VK_CONFIG_TOGGLE_private_force_cursor_move_to_scroll_wheel
+      </autogen>
+    </item>
+
+    <item hidden="true">
+      <name>Force CursorMove to ScrollWheel</name>
+      <identifier vk_config="true">private.force_cursor_move_to_scroll_wheel</identifier>
+      <autogen>__ShowStatusMessage__ CursorMove to ScrollWheel</autogen>
+      <autogen>__PointingRelativeToScroll__ PointingButton::NONE</autogen>
+    </item>
+
+  </item>
+
+  <!-- ============================================================ -->
+  <replacementdef>
+    <replacementname>EMACS_MODE_IGNORE_APPS</replacementname>
+    <replacementvalue>
+      ECLIPSE,
+      EMACS,
+      REMOTEDESKTOPCONNECTION,
+      SCREEN_SHARING,
+      TERMINAL,
+      VI,
+      VIRTUALMACHINE,
+      X11,
+    </replacementvalue>
+  </replacementdef>
+
+  <!-- ============================================================ -->
+  <replacementdef>
+    <replacementname>PC_STYLE_BINDINGS_IGNORE_APPS</replacementname>
+    <replacementvalue>
+      VIRTUALMACHINE,
+      REMOTEDESKTOPCONNECTION,
+      VNC,
+      SCREEN_SHARING,
+      TEAMVIEWER,
+      EMACS,
+      TERMINAL,
+      X11,
+      CITRIX_XEN_APP_VIEWER,
+    </replacementvalue>
+  </replacementdef>
+
+  <replacementdef>
+    <replacementname>PC_STYLE_BINDINGS_IGNORE_APPS_DESCRIPTION</replacementname>
+    <replacementvalue>
+      (Except in VM, RDC, VNC, Screen Sharing, TeamViewer, EMACS, TERMINAL, X11, Citrix Viewer)
+    </replacementvalue>
+  </replacementdef>
+
+</root>
