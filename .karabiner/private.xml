@@ -113,6 +113,17 @@
       <autogen>__PointingRelativeToScroll__ PointingButton::NONE</autogen>
     </item>
 
+    <item>
+      <name>Power management shortcut for dual keyboard</name>
+      <appendix>Ctrl+Shift+PageDown to Ctrl+Shift+Eject</appendix>
+      <identifier>private.power_management_shartcut_for_dual_keyboard</identifier>
+      <autogen>
+        __KeyToKey__
+        KeyCode::PAGEDOWN, ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L,
+        KeyCode::VK_CONSUMERKEY_EJECT, ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L,
+      </autogen>
+    </item>
+
   </item>
 
   <!-- ============================================================ -->
