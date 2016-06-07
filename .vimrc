@@ -506,7 +506,7 @@ let g:syntastic_eruby_ruby_quiet_messages = {
 " caw.vim -----------------------------------------------------------------
 nmap <Leader>c <Plug>(caw:i:toggle)
 vmap <Leader>c <Plug>(caw:i:toggle)
-let g:caw_i_skip_blank_line = 1
+let g:caw_hatpos_skip_blank_line = 1
 
 " diffchar.vim -----------------------------------------------------------------
 let g:DiffUnit = 'Word1'
