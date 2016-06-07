@@ -358,6 +358,7 @@ NeoBundle 'thinca/vim-qfreplace'
 NeoBundle 'gabrielelana/vim-markdown'
 NeoBundle 'vim-scripts/AnsiEsc.vim'
 NeoBundle 'itchyny/vim-parenmatch'
+NeoBundle 'itchyny/vim-cursorword'
 
 call neobundle#end()
 
