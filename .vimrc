@@ -357,6 +357,7 @@ NeoBundle 'cohama/agit.vim'
 NeoBundle 'thinca/vim-qfreplace'
 NeoBundle 'gabrielelana/vim-markdown'
 NeoBundle 'vim-scripts/AnsiEsc.vim'
+NeoBundle 'itchyny/vim-parenmatch'
 
 call neobundle#end()
 
@@ -576,3 +577,6 @@ let g:agit_stat_width = 130
 
 " vim-markdown -----------------------------------------------------------------
 let g:markdown_enable_spell_checking = 0
+
+" vim-parenmatch -----------------------------------------------------------------
+let g:loaded_matchparen = 1
