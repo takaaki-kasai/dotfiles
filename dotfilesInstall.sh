@@ -28,13 +28,13 @@ ln -sf ~/dotfiles/.tigrc.vim ~/.tigrc.vim
 mkdir -p ~/bin
 ln -sf ~/dotfiles/bin/git-diff-normal-format ~/bin/git-diff-normal-format
 ln -sf ~/dotfiles/bin/rubocop ~/bin/rubocop
-ln -sf ~/dotfiles/.karabiner/private.xml ~/Library/Application\ Support/Karabiner/private.xml
 
 if [ `uname` = 'Darwin' ]; then
   #mac用のコード
   git config --global core.editor 'env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim'
   git config --global diff.tool 'macvim'
   git config --global difftool.macvim.cmd 'env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/vimdiff $LOCAL $REMOTE'
+  ln -sf ~/dotfiles/.karabiner/private.xml ~/Library/Application\ Support/Karabiner/private.xml
 elif [ `uname` = 'Linux' ]; then
   #Linux用のコード
   git config --global core.editor 'vim'
