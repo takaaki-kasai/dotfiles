@@ -12,8 +12,11 @@ git config --global diff.algorithm 'histogram'
 git config --global diff.compactionHeuristic true
 git config --global core.whitespace trailing-space,tab-in-indent
 git config --global push.default nothing
+git config --global alias.d 'diff -M100%'
+git config --global alias.dt 'difftool -M100%'
 git config --global alias.l 'log --graph --all --date=short --date-order --format="%C(yellow)%h%C(reset) %C(magenta)[%ad]%C(reset)%C(auto)%d%C(reset) %s %C(cyan)@%an%C(reset)"'
 git config --global alias.lb 'log --graph --date=short --date-order --format="%C(yellow)%h%C(reset) %C(magenta)[%ad]%C(reset)%C(auto)%d%C(reset) %s %C(cyan)@%an%C(reset)"'
+git config --global alias.s 'status'
 git config --global alias.pushall '!f(){ for i in `git remote`; do git push $i $1; done; };f'
 git config --global alias.fetchall '!f(){ for i in `git remote`; do git fetch --prune $i; done; };f'
 ln -sf ~/dotfiles/.zshrc ~/.zshrc
