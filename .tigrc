@@ -55,7 +55,7 @@ bind status ap !git add -p
 
 # タイプ別のリファレンスの表示形式。スペース区切りで指定
 # set reference-format = [branch] <tag> {remote} ~replace~
-set reference-format = [branch] [->head] <tag> <(local-tag)> {remote} {->tracked-remote} ~replace~
+set reference-format = [branch] [->head] <tag> <(local-tag)> {remote} {=tracked-remote} ~replace~
 
 # メインビューにコミットIDを出す
 set main-view-id = yes,width=8
