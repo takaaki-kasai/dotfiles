@@ -4,7 +4,7 @@ source ~/.tigrc.vim
 # generic なキーバインド
 bind generic ca !?sh -c "echo 'Amending previous commit...'; git commit --amend"
 bind generic d none
-bind generic dd view-diff
+bind generic di view-diff
 bind generic y none
 bind generic yl view-stash
 bind generic K none
@@ -29,14 +29,18 @@ bind main mm !@?git merge --no-ff %(branch)
 bind main mf !@?git merge --ff-only %(commit)
 bind main BB !@?git rebase %(commit)
 bind main BI !?sh -c "echo 'Starting interactive rebase...'; git rebase -i %(commit)"
-bind main di :!git diff -M100% %(commit)~..%(commit)
-bind main dI :!git diff -M100% %(commit)..HEAD
-bind main dl :!git diff -M100% --name-status %(commit)~..%(commit)
-bind main dL :!git diff -M100% --name-status %(commit)..HEAD
-bind main dt !git difftool -M100% %(commit)~..%(commit)
-bind main dT !git difftool -M100% %(commit)..HEAD
-bind main ds !git difftool -M100% --cached
-bind main du !git difftool -M100%
+bind main ddu !git diff -M100%
+bind main dds !git diff -M100% --cached
+bind main ddd :!git diff -M100% %(commit)~..%(commit)
+bind main ddh :!git diff -M100% %(commit)..HEAD
+bind main dlu :!git diff -M100% --name-status
+bind main dls :!git diff -M100% --name-status --cached
+bind main dld :!git diff -M100% --name-status %(commit)~..%(commit)
+bind main dlh :!git diff -M100% --name-status %(commit)..HEAD
+bind main dtu !git difftool -M100%
+bind main dts !git difftool -M100% --cached
+bind main dtd !git difftool -M100% %(commit)~..%(commit)
+bind main dth !git difftool -M100% %(commit)..HEAD
 bind main rr !@?git reset %(commit)
 bind main rs !@?git reset --soft %(commit)
 bind main rh !@?git reset --hard %(commit)
