@@ -8,6 +8,11 @@ git config user.name 'Takaaki Kasai'
 git config user.email "$EMAIL_USER$EMAIL_ATMARK$EMAIL_DOMAIN"
 
 cd ~
+git_user_name=$(git config --global user.name)
+git_user_email=$(git config --global user.email)
+rm -f ~/.gitconfig
+git config --global user.name "$git_user_name"
+git config --global user.email "$git_user_email"
 git config --global diff.algorithm 'histogram'
 git config --global diff.compactionHeuristic true
 git config --global core.whitespace trailing-space,tab-in-indent
