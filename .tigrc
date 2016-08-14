@@ -29,6 +29,7 @@ bind main mm !@?git merge --no-ff %(branch)
 bind main mf !@?git merge --ff-only %(commit)
 bind main BB !@?git rebase %(commit)
 bind main BI !?sh -c "echo 'Starting interactive rebase...'; git rebase -i %(commit)"
+bind main cp !@?git cherry-pick %(commit)
 bind main ddu !git diff -M100%
 bind main dds !git diff -M100% --cached
 bind main ddd :!git diff -M100% %(commit)~..%(commit)
@@ -46,6 +47,7 @@ bind main rs !@?git reset --soft %(commit)
 bind main rh !@?git reset --hard %(commit)
 bind main yy !@git stash
 bind main yp !@git stash pop
+bind main L !git l
 
 # refs view のキーバインド
 bind refs D none
