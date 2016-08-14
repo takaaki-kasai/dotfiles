@@ -9,6 +9,9 @@ bind generic y none
 bind generic yl view-stash
 bind generic K none
 bind generic H view-help
+bind generic W none
+bind generic w :set ignore-space = all
+bind generic W :set ignore-space = no
 
 # main view のキーバインド
 bind generic D none
@@ -70,7 +73,8 @@ set main-view-id = yes,width=8
 set line-graphics = utf-8
 
 # git diff のオプションを指定
-set diff-options = -w -M100%
+set diff-options = -M100%
+# set ignore-space = all # キーバインドでトグルできるようにするため、空白文字無視オプションはこちらで指定
 
 # コミットの並び順
 # set commit-order = date
