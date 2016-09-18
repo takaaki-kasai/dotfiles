@@ -37,6 +37,7 @@ set list                                         " 特殊文字を表示
 set nowrap                                       " 画面端での自動折り返しを行わない
 set display+=lastline                            " 画面最後の行をできる限り表示する。
 " autocmd FileType * setlocal formatoptions+=B   " テキスト自動整形の振る舞い（参照：help fo-table）
+set tabpagemax=20                                " タブページの最大個数
 
 " 幅が曖昧な文字を一文字分(single)とするか二文字分(double)とするか
 if exists('&ambiwidth')
