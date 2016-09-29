@@ -4,16 +4,17 @@
     <name>Private</name>
     <item>
       <name>Change MiddleClick and MouseButton4</name>
-      <appendix>MouseButton4 to Dashboard</appendix>
+      <appendix>MouseButton4 to Lock Screen</appendix>
       <appendix>(Simultaneous)MiddleClick and LeftClick to Launchpad</appendix>
       <appendix>(Simultaneous)MiddleClick and RightClick to Ctrl+Right</appendix>
       <appendix>(Simultaneous)MouseButton4 and LeftClick to Ctrl+Left</appendix>
       <appendix>(Simultaneous)MouseButton4 and RightClick to Show Desktop</appendix>
+      <appendix>(Simultaneous)MouseButton4 and MiddleClick to Dashboard</appendix>
       <identifier>private.change_middle_click_mouse_button4</identifier>
       <autogen>
         __PointingButtonToKey__
         PointingButton::BUTTON4,
-        KeyCode::DASHBOARD
+        ConsumerKeyCode::EJECT, ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L
       </autogen>
       <autogen>
         __SimultaneousKeyPresses__
@@ -34,6 +35,11 @@
         __SimultaneousKeyPresses__
         PointingButton::BUTTON4, PointingButton::RIGHT,
         KeyCode::MISSION_CONTROL, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_COMMAND
+      </autogen>
+      <autogen>
+        __SimultaneousKeyPresses__
+        PointingButton::BUTTON4, PointingButton::MIDDLE,
+        KeyCode::DASHBOARD
       </autogen>
     </item>
 
@@ -111,17 +117,6 @@
       <identifier vk_config="true">private.force_cursor_move_to_scroll_wheel</identifier>
       <autogen>__ShowStatusMessage__ CursorMove to ScrollWheel</autogen>
       <autogen>__PointingRelativeToScroll__ PointingButton::NONE</autogen>
-    </item>
-
-    <item>
-      <name>Power management shortcut for dual keyboard</name>
-      <appendix>Ctrl+Shift+PageDown to Ctrl+Shift+Eject</appendix>
-      <identifier>private.power_management_shartcut_for_dual_keyboard</identifier>
-      <autogen>
-        __KeyToKey__
-        KeyCode::PAGEDOWN, ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L,
-        KeyCode::VK_CONSUMERKEY_EJECT, ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L,
-      </autogen>
     </item>
 
   </item>
