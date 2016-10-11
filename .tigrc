@@ -33,7 +33,7 @@ bind main D !@?git branch -d %(branch)
 bind main ! !@?git branch -D %(branch)
 bind main mm !@?git merge --no-ff %(branch)
 bind main mf !@?git merge --ff-only %(commit)
-bind main BB !@?git rebase %(commit)
+bind main BB !@?git rebase -p %(commit)
 bind main BI !?sh -c "echo 'Starting interactive rebase...'; git rebase -i %(commit)"
 bind main cp !@?git cherry-pick %(commit)
 bind main ddu !git diff -M100%
