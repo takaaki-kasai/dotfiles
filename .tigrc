@@ -2,6 +2,7 @@
 source ~/.tigrc.vim
 
 # generic なキーバインド
+bind generic b none
 bind generic ca !?sh -c "echo 'Amending previous commit...'; git commit --amend"
 bind generic d none
 bind generic di view-diff
@@ -25,6 +26,8 @@ bind main w view-tree
 bind main G move-last-line
 bind main F !sh -c "echo 'Fetching...'; git fetchall"
 bind main P !?sh -c "echo 'Pushing...'; git pushall %(branch)"
+bind main bb !@?git branch "%(prompt New branch name: )"
+bind main bc !@?git checkout -b "%(prompt New branch name to checkout: )"
 bind main C !@?git checkout %(branch)
 bind main D !@?git branch -d %(branch)
 bind main ! !@?git branch -D %(branch)
