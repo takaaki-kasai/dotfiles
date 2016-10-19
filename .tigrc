@@ -3,7 +3,11 @@ source ~/.tigrc.vim
 
 # generic なキーバインド
 bind generic b none
+bind generic cc !?sh -c "echo 'Commit...'; git commit"
 bind generic ca !?sh -c "echo 'Amending previous commit...'; git commit --amend"
+bind generic ap !?sh -c "echo 'Add patch...'; git add -p"
+bind generic s none
+bind generic s !sh -c "echo -n '\\n============================== git status ==============================\\n\\n'; git s"
 bind generic d none
 bind generic di view-diff
 bind generic y none
@@ -13,21 +17,22 @@ bind generic H view-help
 bind generic W none
 bind generic w :set ignore-space = all
 bind generic W :set ignore-space = no
-
-# main view のキーバインド
+bind generic r none
+bind generic t none
+bind generic m none
 bind generic D none
 bind generic F none
-bind main r none
-bind main t none
-bind main m none
+
+# main view のキーバインド
 bind main M view-main
 bind main t view-refs
 bind main w view-tree
 bind main G move-last-line
 bind main F !sh -c "echo 'Fetching...'; git fetchall"
 bind main P !?sh -c "echo 'Pushing...'; git pushall %(branch)"
-bind main bb !@?git branch "%(prompt New branch name: )"
-bind main bc !@?git checkout -b "%(prompt New branch name to checkout: )"
+bind main bb !@?git branch "%(prompt New branch name to create: )" %(commit)
+bind main bc !@?git checkout -b "%(prompt New branch name to checkout: )" %(commit)
+bind main bm !@?git branch -m %(branch) "%(prompt Rename branch to: )"
 bind main C !@?git checkout %(branch)
 bind main D !@?git branch -d %(branch)
 bind main ! !@?git branch -D %(branch)
