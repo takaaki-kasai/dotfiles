@@ -348,6 +348,7 @@ NeoBundle 'Shougo/vimproc.vim', {
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'othree/eregex.vim'
+NeoBundle 'othree/html5.vim'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'scrooloose/syntastic'
