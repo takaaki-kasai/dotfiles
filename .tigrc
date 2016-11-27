@@ -24,7 +24,7 @@ bind generic D none
 bind generic F none
 
 # main view のキーバインド
-bind main M view-main
+bind main C none
 bind main t view-refs
 bind main w view-tree
 bind main G move-last-line
@@ -33,7 +33,7 @@ bind main P !?sh -c "echo 'Pushing...'; git pushall %(branch)"
 bind main bb !@?git branch "%(prompt New branch name to create: )" %(commit)
 bind main bc !@?git checkout -b "%(prompt New branch name to checkout: )" %(commit)
 bind main bm !@?git branch -m %(branch) "%(prompt Rename branch to: )"
-bind main C !@?git checkout %(branch)
+bind main co !@?git checkout %(branch)
 bind main D !@?git branch -d %(branch)
 bind main ! !@?git branch -D %(branch)
 bind main mm !@?git merge --no-ff --no-edit %(branch)
@@ -44,16 +44,19 @@ bind main BI !?sh -c "echo 'Starting interactive rebase...'; git rebase -i %(com
 bind main cp !@?git cherry-pick %(commit)
 bind main ddu !git diff -M100%
 bind main dds !git diff -M100% --cached
-bind main ddd :!git diff -M100% %(commit)~..%(commit)
+bind main ddp :!git diff -M100% %(commit)~..%(commit)
 bind main ddh :!git diff -M100% %(commit)..HEAD
+bind main ddw :!git diff -M100% %(commit)
 bind main dlu :!git diff -M100% --name-status
 bind main dls :!git diff -M100% --name-status --cached
-bind main dld :!git diff -M100% --name-status %(commit)~..%(commit)
+bind main dlp :!git diff -M100% --name-status %(commit)~..%(commit)
 bind main dlh :!git diff -M100% --name-status %(commit)..HEAD
+bind main dlw :!git diff -M100% --name-status %(commit)
 bind main dtu !git difftool -M100%
 bind main dts !git difftool -M100% --cached
-bind main dtd !git difftool -M100% %(commit)~..%(commit)
+bind main dtp !git difftool -M100% %(commit)~..%(commit)
 bind main dth !git difftool -M100% %(commit)..HEAD
+bind main dtw !git difftool -M100% %(commit)
 bind main rr !@?git reset %(commit)
 bind main rs !@?git reset --soft %(commit)
 bind main rh !@?git reset --hard %(commit)
@@ -62,11 +65,10 @@ bind main yp !@git stash pop
 bind main L !git l
 
 # refs view のキーバインド
-bind refs D none
+bind refs C none
 bind refs D !@?git branch -d %(branch)
 bind refs ! !@?git branch -D %(branch)
-bind refs C !@?git checkout %(branch)
-bind refs M !?git merge %(ref)
+bind refs co !@?git checkout %(branch)
 
 # status view のキーバインド
 bind status ap !git add -p
