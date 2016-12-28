@@ -216,7 +216,7 @@ alias tigs="tig status"
 #export XKEYSYMDB=/usr/share/X11/XKeysymDB
 #export XAPPLRESDIR=/usr/share/X11
 export SVN_EDITOR=vim
-export LESS='-g -j10 -R -Q'
+export LESS='-g -i -j10 -R -Q'
 
 ### アプリケーション固有設定 ############################################################
 # for rbenv
