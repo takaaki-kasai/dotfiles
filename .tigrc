@@ -87,7 +87,7 @@ set main-view-id = yes,width=8
 set line-graphics = utf-8
 
 # git diff のオプションを指定
-set diff-options = -M100% --histogram --compaction-heuristic
+set diff-options = -M100% --histogram --indent-heuristic
 # set ignore-space = all # キーバインドでトグルできるようにするため、空白文字無視オプションはこちらで指定
 
 # 行番号と表示する間隔
