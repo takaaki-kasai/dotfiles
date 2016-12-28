@@ -28,6 +28,7 @@ git config --global alias.lb 'log --graph --date=short --date-order --format="%C
 git config --global alias.s 'status'
 git config --global alias.pushall '!f(){ for i in `git remote`; do git push $i $1; done; };f'
 git config --global alias.fetchall '!f(){ for i in `git remote`; do git fetch --prune $i; done; };f'
+ln -sf ~/dotfiles/.zprofile ~/.zprofile
 ln -sf ~/dotfiles/.zshrc ~/.zshrc
 ln -snf ~/dotfiles/.zsh ~/.zsh
 ln -sf ~/dotfiles/.vimrc ~/.vimrc
