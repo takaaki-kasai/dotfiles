@@ -260,45 +260,9 @@ set clipboard+=unnamed        " ヤンク、カットの操作で無名レジス
 set encoding=utf-8                " デフォルトのエンコーディング
 
 " 文字コードの自動認識
-if &encoding !=# 'utf-8'
-  set encoding=japan
-  set fileencoding=japan
-endif
 if has('iconv')
-  let s:enc_euc = 'euc-jp'
-  let s:enc_jis = 'iso-2022-jp'
-  " iconvがeucJP-msに対応しているかをチェック
-  if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
-    let s:enc_euc = 'eucjp-ms'
-    let s:enc_jis = 'iso-2022-jp-3'
-    " iconvがJISX0213に対応しているかをチェック
-  elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
-    let s:enc_euc = 'euc-jisx0213'
-    let s:enc_jis = 'iso-2022-jp-3'
-  endif
   " fileencodingsを構築
-  if &encoding ==# 'utf-8'
-    let s:fileencodings_default = &fileencodings
-    let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
-    let &fileencodings = &fileencodings .','. s:fileencodings_default
-    unlet s:fileencodings_default
-  else
-    let &fileencodings = &fileencodings .','. s:enc_jis
-    set fileencodings+=utf-8,ucs-2le,ucs-2
-    if &encoding =~# '^\(euc-jp\|euc-jisx0213\|eucjp-ms\)$'
-      set fileencodings+=cp932
-      set fileencodings-=euc-jp
-      set fileencodings-=euc-jisx0213
-      set fileencodings-=eucjp-ms
-      let &encoding = s:enc_euc
-      let &fileencoding = s:enc_euc
-    else
-      let &fileencodings = &fileencodings .','. s:enc_euc
-    endif
-  endif
-  " 定数を処分
-  unlet s:enc_euc
-  unlet s:enc_jis
+  let &fileencodings = 'iso-2022-jp-3,euc-jisx0213,cp932,ucs-bom,utf-8,latin1,' . &fileencodings
 endif
 " 日本語を含まない場合は fileencoding に encoding を使うようにする
 if has('autocmd')
@@ -309,10 +273,6 @@ if has('autocmd')
   endfunction
   autocmd BufReadPost * call MyAUReCheckFENC()
 endif
-" utf-8優先
-let &fileencodings = substitute(&fileencodings, 'utf-8', '_utf-8', 'g')
-let &fileencodings = substitute(&fileencodings, 'cp932', 'utf-8', 'g')
-let &fileencodings = substitute(&fileencodings, '_utf-8', 'cp932', 'g')
 " 改行コードの自動認識
 set fileformats=unix,dos,mac
 
