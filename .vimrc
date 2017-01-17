@@ -262,7 +262,7 @@ set encoding=utf-8                " デフォルトのエンコーディング
 " 文字コードの自動認識
 if has('iconv')
   " fileencodingsを構築
-  let &fileencodings = 'iso-2022-jp-3,euc-jisx0213,cp932,ucs-bom,utf-8,latin1,' . &fileencodings
+  let &fileencodings = 'ucs-bom,utf-8,iso-2022-jp-3,euc-jisx0213,cp932,latin1'
 endif
 " 日本語を含まない場合は fileencoding に encoding を使うようにする
 if has('autocmd')
