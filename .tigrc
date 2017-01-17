@@ -47,16 +47,19 @@ bind main dds :!git diff -M100% --cached
 bind main ddp :!git diff -M100% %(commit)~..%(commit)
 bind main ddh :!git diff -M100% %(commit)..HEAD
 bind main ddw :!git diff -M100% %(commit)
+bind main ddi :!git diff -M100% %(commit) --cached
 bind main dlu :!git diff -M100% --name-status
 bind main dls :!git diff -M100% --name-status --cached
 bind main dlp :!git diff -M100% --name-status %(commit)~..%(commit)
 bind main dlh :!git diff -M100% --name-status %(commit)..HEAD
 bind main dlw :!git diff -M100% --name-status %(commit)
+bind main dli :!git diff -M100% --name-status %(commit) --cached
 bind main dtu !git difftool -M100%
 bind main dts !git difftool -M100% --cached
 bind main dtp !git difftool -M100% %(commit)~..%(commit)
 bind main dth !git difftool -M100% %(commit)..HEAD
 bind main dtw !git difftool -M100% %(commit)
+bind main dti !git difftool -M100% %(commit) --cached
 bind main rr !@?git reset %(commit)
 bind main rs !@?git reset --soft %(commit)
 bind main rh !@?git reset --hard %(commit)
