@@ -39,6 +39,7 @@ bind main ! !@?git branch -D %(branch)
 bind main mn !@?git merge --no-ff --no-edit %(branch)
 bind main mm !?git merge --no-ff %(branch)
 bind main mf !@?git merge --ff-only %(commit)
+bind main mt !sh -c "echo 'Testing for merge %(branch)...'; git mergetest %(branch)"
 bind main BB !@?git rebase -p %(commit)
 bind main BI !?sh -c "echo 'Starting interactive rebase...'; git rebase -i %(commit)"
 bind main cp !@?git cherry-pick %(commit)
