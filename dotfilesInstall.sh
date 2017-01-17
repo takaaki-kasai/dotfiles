@@ -28,6 +28,7 @@ git config --global alias.lb 'log --graph --date=short --date-order --format="%C
 git config --global alias.s 'status'
 git config --global alias.pushall '!f(){ for i in `git remote`; do git push $i $1; done; };f'
 git config --global alias.fetchall '!f(){ for i in `git remote`; do git fetch --prune $i; done; };f'
+git config --global alias.mergetest '!f(){ git merge $1 --no-commit --no-ff; local ret=$?; [ -f $(git rev-parse --git-dir)/MERGE_HEAD ] && git merge --abort && /bin/echo "Merge aborted"; if [ $ret -eq 0 ]; then /bin/echo -e "\e[32mMerge test: OK\e[m"; else /bin/echo -e "\e[31mMerge test: NG\e[m"; fi; }; f'
 ln -sf ~/dotfiles/.zprofile ~/.zprofile
 ln -sf ~/dotfiles/.zshrc ~/.zshrc
 ln -snf ~/dotfiles/.zsh ~/.zsh
