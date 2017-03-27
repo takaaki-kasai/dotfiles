@@ -79,7 +79,17 @@ zstyle ':completion:*' group-name ''
 setopt combining_chars
 
 # 定義したエイリアスでも補完を効かせる
-_git-pushall () { _git-push; }
+_git-ddu () { _git-diff; }
+_git-dds () { _git-diff; }
+_git-dlu () { _git-diff; }
+_git-dls () { _git-diff; }
+_git-dtu () { _git-difftool; }
+_git-dts () { _git-difftool; }
+# _git-pushall () { _git-push; }
+_git-pushmulti () { _git-push; }
+_git-pushforcemulti () { _git-push; }
+_git-pushdeletemulti () { _git-push; }
+_git-fetchall () { _git-fetch; }
 _git-mergetest () { _git-merge; }
 
 ### 動作挙動関連 ############################################################
