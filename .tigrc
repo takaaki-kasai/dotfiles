@@ -21,14 +21,20 @@ bind generic t none
 bind generic m none
 bind generic D none
 bind generic F none
+bind generic f none
+bind generic p none
 
 # main view のキーバインド
 bind main C none
 bind main t view-refs
 bind main w view-tree
 bind main G move-last-line
-bind main F !sh -c "echo 'Fetching...'; git fetchall"
-bind main P !?sh -c "echo 'Pushing...'; git pushall %(branch)"
+bind main F none
+bind main fa !sh -c "echo 'Fetching...'; git fetchall"
+# bind main pa !?sh -c "echo 'Pushing...'; git pushall %(branch)"
+bind main pm !?sh -c "echo 'Pushing...'; git pushmulti %(prompt Remotes to push [comma separated]: ) %(branch)"
+bind main pf !?sh -c "echo 'Force Pushing...'; git pushforcemulti %(prompt Remotes to force push [comma separated]: ) %(branch)"
+bind main pd !?sh -c "echo 'Pushing branch deletion...'; git pushdeletemulti %(prompt Remotes to push branch deletion [comma separated]: ) %(branch)"
 bind main T !?git tag -a "%(prompt New tag name to create: )" %(commit)
 bind main bb !@?git branch "%(prompt New branch name to create: )" %(commit)
 bind main bc !@?git checkout -b "%(prompt New branch name to checkout: )" %(commit)
