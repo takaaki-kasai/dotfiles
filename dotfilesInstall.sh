@@ -27,10 +27,10 @@ git config --global alias.l 'log --graph --all --date=short --date-order --forma
 git config --global alias.lb 'log --graph --date=short --date-order --format="%C(yellow)%h%C(reset) %C(magenta)[%ad]%C(reset)%C(auto)%d%C(reset) %s %C(cyan)@%an%C(reset)"'
 git config --global alias.s 'status'
 # git config --global alias.pushall '!f(){ for i in `git remote`; do git push $i $1; done; };f'
-git config --global alias.pushmulti '!f(){ for i in `echo "$1" | tr "," " "`; do git push $i $2; done; };f'
-git config --global alias.pushforcemulti '!f(){ for i in `echo "$1" | tr "," " "`; do git push -f $i $2; done; };f'
-git config --global alias.pushdeletemulti '!f(){ for i in `echo "$1" | tr "," " "`; do git push $i :$2; done; };f'
-git config --global alias.fetchall '!f(){ for i in `git remote`; do git fetch --prune $i; done; };f'
+git config --global alias.pushmulti '!f(){ for i in `echo "$1" | tr "," " "`; do echo "--- Pushing $2 to $i"; git push $i $2; echo ""; done; };f'
+git config --global alias.pushforcemulti '!f(){ for i in `echo "$1" | tr "," " "`; do echo "--- Force Pushing $2 to $i"; git push -f $i $2; echo ""; done; };f'
+git config --global alias.pushdeletemulti '!f(){ for i in `echo "$1" | tr "," " "`; do echo "--- Deleting $2 from $i"; git push $i :$2; echo ""; done; };f'
+git config --global alias.fetchall '!f(){ for i in `git remote`; do echo "--- Fetching from $i"; git fetch --prune $i; echo ""; done; };f'
 git config --global alias.mergetest '!f(){ git merge $1 --no-commit --no-ff; local ret=$?; [ -f $(git rev-parse --git-dir)/MERGE_HEAD ] && git merge --abort && /bin/echo "Merge aborted"; if [ $ret -eq 0 ]; then /bin/echo -e "\e[32mMerge test: OK\e[m"; else /bin/echo -e "\e[31mMerge test: FAILED\e[m"; fi; }; f'
 ln -sf ~/dotfiles/.zprofile ~/.zprofile
 ln -sf ~/dotfiles/.zshrc ~/.zshrc
