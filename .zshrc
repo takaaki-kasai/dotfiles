@@ -221,6 +221,7 @@ esac
 
 alias tiga="tig --all"
 alias tigs="tig status"
+alias grep="grep --color=auto"
 
 ### 環境変数 ############################################################
 #export JAVA_HOME=/usr/java/latest
