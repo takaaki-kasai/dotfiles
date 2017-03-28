@@ -107,7 +107,7 @@ set diff-options = -M100% --histogram --indent-heuristic
 set pager-view-line-number = yes,interval=1
 
 # コミットの並び順
-set commit-order = topo
+set commit-order = date
 
 # 描画更新のタイミング
 # set refresh-mode = after-command
