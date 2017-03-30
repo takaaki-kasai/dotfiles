@@ -49,24 +49,24 @@ bind main mt !sh -c "echo 'Testing for merge %(branch)...'; git mergetest %(bran
 bind main BB !@?git rebase -p %(commit)
 bind main BI !?sh -c "echo 'Starting interactive rebase...'; git rebase -i %(commit)"
 bind main cp !@?git cherry-pick %(commit)
-bind main ddu :!git diff -M100%
-bind main dds :!git diff -M100% --cached
-bind main ddp :!git diff -M100% %(commit)~..%(commit)
-bind main ddh :!git diff -M100% %(commit)..HEAD
-bind main ddw :!git diff -M100% %(commit)
-bind main ddi :!git diff -M100% %(commit) --cached
-bind main dlu :!git diff -M100% --name-status
-bind main dls :!git diff -M100% --name-status --cached
-bind main dlp :!git diff -M100% --name-status %(commit)~..%(commit)
-bind main dlh :!git diff -M100% --name-status %(commit)..HEAD
-bind main dlw :!git diff -M100% --name-status %(commit)
-bind main dli :!git diff -M100% --name-status %(commit) --cached
-bind main dtu !git difftool -M100%
-bind main dts !git difftool -M100% --cached
-bind main dtp !git difftool -M100% %(commit)~..%(commit)
-bind main dth !git difftool -M100% %(commit)..HEAD
-bind main dtw !git difftool -M100% %(commit)
-bind main dti !git difftool -M100% %(commit) --cached
+bind main ddu :!git diff -M100% -C100%
+bind main dds :!git diff -M100% -C100% --cached
+bind main ddp :!git diff -M100% -C100% %(commit)~..%(commit)
+bind main ddh :!git diff -M100% -C100% %(commit)..HEAD
+bind main ddw :!git diff -M100% -C100% %(commit)
+bind main ddi :!git diff -M100% -C100% %(commit) --cached
+bind main dlu :!git diff -M100% -C100% --name-status
+bind main dls :!git diff -M100% -C100% --name-status --cached
+bind main dlp :!git diff -M100% -C100% --name-status %(commit)~..%(commit)
+bind main dlh :!git diff -M100% -C100% --name-status %(commit)..HEAD
+bind main dlw :!git diff -M100% -C100% --name-status %(commit)
+bind main dli :!git diff -M100% -C100% --name-status %(commit) --cached
+bind main dtu !git difftool -M100% -C100%
+bind main dts !git difftool -M100% -C100% --cached
+bind main dtp !git difftool -M100% -C100% %(commit)~..%(commit)
+bind main dth !git difftool -M100% -C100% %(commit)..HEAD
+bind main dtw !git difftool -M100% -C100% %(commit)
+bind main dti !git difftool -M100% -C100% %(commit) --cached
 bind main rr !@?git reset %(commit)
 bind main rs !@?git reset --soft %(commit)
 bind main rh !@?git reset --hard %(commit)
@@ -97,7 +97,7 @@ set main-view-id = yes,width=8
 set line-graphics = utf-8
 
 # git diff のオプションを指定
-set diff-options = -M100% --histogram --indent-heuristic
+set diff-options = -M100% -C100% --histogram --indent-heuristic
 # set ignore-space = all # キーバインドでトグルできるようにするため、空白文字無視オプションはこちらで指定
 
 # 行番号と表示する間隔

@@ -17,12 +17,12 @@ git config --global diff.algorithm 'histogram'
 git config --global diff.indentHeuristic true
 git config --global core.whitespace trailing-space,tab-in-indent
 git config --global push.default nothing
-git config --global alias.ddu 'diff -M100%'
-git config --global alias.dds 'diff -M100% --cached'
-git config --global alias.dlu 'diff -M100% --name-status'
-git config --global alias.dls 'diff -M100% --name-status --cached'
-git config --global alias.dtu 'difftool -M100%'
-git config --global alias.dts 'difftool -M100% --cached'
+git config --global alias.ddu 'diff -M100% -C100%'
+git config --global alias.dds 'diff -M100% -C100% --cached'
+git config --global alias.dlu 'diff -M100% -C100% --name-status'
+git config --global alias.dls 'diff -M100% -C100% --name-status --cached'
+git config --global alias.dtu 'difftool -M100% -C100%'
+git config --global alias.dts 'difftool -M100% -C100% --cached'
 git config --global alias.l 'log --graph --all --date=short --date-order --format="%C(yellow)%h%C(reset) %C(magenta)[%ad]%C(reset)%C(auto)%d%C(reset) %s %C(cyan)@%an%C(reset)"'
 git config --global alias.lb 'log --graph --date=short --date-order --format="%C(yellow)%h%C(reset) %C(magenta)[%ad]%C(reset)%C(auto)%d%C(reset) %s %C(cyan)@%an%C(reset)"'
 git config --global alias.s 'status'
