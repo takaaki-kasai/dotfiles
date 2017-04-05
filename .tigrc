@@ -75,6 +75,8 @@ bind main yp !@git stash pop
 bind main sh :!git show %(ref)
 bind main st :!git status
 bind main L !git l
+bind main fo !sh -c "git-forest --all | less"
+bind main fi !sh -c "git-forest | less"
 
 # refs view のキーバインド
 bind refs C none
