@@ -45,6 +45,7 @@ ln -sf ~/dotfiles/.tigrc ~/.tigrc
 ln -sf ~/dotfiles/.tigrc.vim ~/.tigrc.vim
 mkdir -p ~/bin
 ln -sf ~/dotfiles/bin/git-diff-normal-format ~/bin/git-diff-normal-format
+ln -sf ~/dotfiles/bin/git-forest ~/bin/git-forest
 ln -sf ~/dotfiles/bin/rubocop ~/bin/rubocop
 
 if [ `uname` = 'Darwin' ]; then
