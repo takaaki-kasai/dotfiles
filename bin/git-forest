@@ -16,7 +16,6 @@ use Encode qw(encode);
 use POSIX qw(strftime);
 my $Repo          = Git->repository($ENV{"GIT_DIR"} || ".");
 # my $Pretty_fmt    = "format:%s";
-# my $Pretty_fmt    = "format:%C(yellow)%h%C(reset) %C(magenta)[%ad]%C(reset)%C(auto)%d%C(reset) %s %C(cyan)@%an%C(reset)";
 my $Pretty_fmt    = "format:%h\t%at\t%an\t%C(reset)%C(auto)%d%C(reset) %s ";
 my $Reverse_order = 0;
 my $Show_all      = 0;
@@ -94,7 +93,7 @@ sub main
     #
     unshift(@ARGV, "--all", "HEAD");
   }
-  unshift(@ARGV, '--color', '--date=short');
+  unshift(@ARGV, '--color');
   if ($Reverse_order) {
     tie(*STDOUT, "ReverseOutput");
   }
@@ -160,7 +159,7 @@ sub process
       print &vis_post(&vis_commit($ra));
     }
 
-    print ' ', $Color{yellow}, $author;
+    print ' ', $Color{yellow}, $author, $Color{default};
 
     if ($With_sha) {
       print $msg, $Color{at}, encode('UTF-8', "──("), $Color{sha}, $mini_sha,
