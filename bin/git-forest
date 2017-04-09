@@ -345,6 +345,9 @@ sub vine_commit
   if (scalar(@$parents) == 0) {
     # tree root
     $ret =~ tr/C/r/;
+  } elsif (scalar(@$parents) > 1) {
+    # merge commit
+    $ret =~ tr/C/M/;
   }
 
   return $ret;
@@ -560,6 +563,7 @@ sub vis_xfrm
   # A: branch to right
   # B: branch to right
   # C: commit
+  # M: merge commit
   # D:
   # e: merge visual left (╔)
   # f: merge visual center (╦)
@@ -617,7 +621,7 @@ sub vis_xfrm
     $s =~ tr/ABCD.efg.IKO.mrt.xyz/╠╣╟═.╔╦╗.║╬═.─╙╓.╚╩╝/;
   } elsif ($Style == 10) {
     # $s =~ tr/ABCD.efg.IKO.mrt.xyz/├┤├─.╭┬╮.│┼≡.─└┌.╰┴╯/;
-    $s =~ tr/ABCD.efg.IKO.mrt.xyz/├┤●─.╭┬╮.│┼≡.─■○.╰┴╯/;
+    $s =~ tr/ABCDM.efg.IKO.mrt.xyz/├┤●─◎.╭┬╮.│┼≡.─■○.╰┴╯/;
   } elsif ($Style == 15) {
     $s =~ tr/ABCD.efg.IKO.mrt.xyz/┣┫┣━.┏┳┓.┃╋☰.━┗┏.┗┻┛/;
   }
@@ -642,9 +646,9 @@ sub vis_post
     $s .= $f;
   }
 
-  if ($s =~ /^(.*)([○●■])/) {
+  if ($s =~ /^(.*)([○◎●■])/) {
     my $branch_color = $Color{$Branch_colors_now[length($1) / 2]};
-    $s =~ s/([○●■])/$branch_color$1$Color{tree}/;
+    $s =~ s/([○◎●■])/$branch_color$1$Color{tree}/;
   }
   return $Color{tree}, encode('UTF-8', $s), $Color{default};
 }
