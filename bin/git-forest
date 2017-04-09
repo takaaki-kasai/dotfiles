@@ -54,6 +54,8 @@ my %Color         = (
   "cyan_bold"    => "\e[1;36m", # ]
   "white_bold"   => "\e[1;37m", # ]
 );
+my @Branch_colors_ref = ('blue_bold', 'yellow_bold', 'magenta_bold', 'green_bold', 'cyan_bold');
+my @Branch_colors_now = ();
 my $Hash_width = 8;
 my $Date_format = "%Y-%m-%d %H:%M";
 my $Date_width = 17;
@@ -583,6 +585,28 @@ sub vis_xfrm
     }esg;
   }
 
+  # Change Branch colors
+  my @s_arr_orig = split //, $s;
+  my @s_arr_odd;
+  foreach my $i(0 .. $#s_arr_orig) {
+    if ($i % 2 == 0) {
+      push @s_arr_odd, $s_arr_orig[$i];
+    }
+  }
+  foreach my $i(0 .. $#s_arr_odd) {
+    if ($s_arr_odd[$i] =~ /^[efgt]$/) {
+      my $j = -1;
+      while ($j <= $#Branch_colors_ref) {
+        $j++;
+        next if ($i > 0 && $Branch_colors_now[$i - 1] eq $Branch_colors_ref[$j]);
+        next if ($Branch_colors_now[$i] eq $Branch_colors_ref[$j]);
+        next if ($i < $#s_arr_odd && $Branch_colors_now[$i + 1] eq $Branch_colors_ref[$j]);
+        last;
+      }
+      $Branch_colors_now[$i] = $Branch_colors_ref[$j];
+    }
+  }
+
   if ($Reverse_order) {
     $s =~ tr/efg.rt.xyz/xyz.tr.efg/;
   }
@@ -618,7 +642,10 @@ sub vis_post
     $s .= $f;
   }
 
-  $s =~ s/([○●■])/$Color{blue_bold}$1$Color{tree}/;
+  if ($s =~ /^(.*)([○●■])/) {
+    my $branch_color = $Color{$Branch_colors_now[length($1) / 2]};
+    $s =~ s/([○●■])/$branch_color$1$Color{tree}/;
+  }
   return $Color{tree}, encode('UTF-8', $s), $Color{default};
 }
 
