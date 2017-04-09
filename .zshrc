@@ -230,7 +230,7 @@ alias git-forest="git-forest --all | less"
 #export XAPPLRESDIR=/usr/share/X11
 export SVN_EDITOR=vim
 # export LESS='-g -i -j10 -R -Q'
-export LESS='-i -R -Q'
+export LESS='-i -R -S -Q'
 
 ### アプリケーション固有設定 ############################################################
 # for rbenv
