@@ -147,7 +147,7 @@ sub process
 
     &vine_branch(\@vine, $sha);
 
-    printf("$Color{magenta}%-${Hash_width}s $Color{blue}%-${Date_width}s $Color{default}", $hash, $date);
+    print sprintf("$Color{magenta}%-${Hash_width}s $Color{blue}%-${Date_width}s $Color{default}", $hash, $date);
 
     my $ra = &vine_commit(\@vine, $sha, \@parents);
 
@@ -295,7 +295,7 @@ sub vine_branch
   }
 
   &remove_trailing_blanks($vine);
-  printf("%-${Hash_width}s %-${Date_width}s ", '', '');
+  print sprintf("%-${Hash_width}s %-${Date_width}s ", '', '');
   print &vis_post(&vis_fan($ret, "branch")), "\n";
 }
 
@@ -479,7 +479,7 @@ sub vine_merge
     }
   }
 
-  printf("%-${Hash_width}s %-${Date_width}s ", '', '');
+  print sprintf("%-${Hash_width}s %-${Date_width}s ", '', '');
   print &vis_post(&vis_fan($ret, "merge")), "\n";
 }
 
