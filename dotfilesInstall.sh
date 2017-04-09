@@ -44,6 +44,8 @@ ln -sf ~/dotfiles/.colordiffrc ~/.colordiffrc
 ln -sf ~/dotfiles/.screenrc ~/.screenrc
 ln -sf ~/dotfiles/.tigrc ~/.tigrc
 ln -sf ~/dotfiles/.tigrc.vim ~/.tigrc.vim
+ln -snf ~/dotfiles/.lesskey ~/.lesskey
+lesskey
 mkdir -p ~/bin
 ln -sf ~/dotfiles/bin/git-diff-normal-format ~/bin/git-diff-normal-format
 ln -sf ~/dotfiles/bin/git-forest ~/bin/git-forest
