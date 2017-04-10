@@ -620,14 +620,17 @@ sub vis_xfrm
   }
 
   if ($Style == 1) {
-    $s =~ tr/ABCD.efg.IKO.mrt.xyz/├┤├─.┌┬┐.│┼≡.─└┌.└┴┘/;
+    # $s =~ tr/ABCD.efg.IKO.mrt.xyz/├┤├─.┌┬┐.│┼≡.─└┌.└┴┘/;
+    $s =~ tr/ABCDM.efg.IKO.mrt.xyz/├┤├─├.┌┬┐.│┼≡.─└┌.└┴┘/;
   } elsif ($Style == 2) {
-    $s =~ tr/ABCD.efg.IKO.mrt.xyz/╠╣╟═.╔╦╗.║╬═.─╙╓.╚╩╝/;
+    # $s =~ tr/ABCD.efg.IKO.mrt.xyz/╠╣╟═.╔╦╗.║╬═.─╙╓.╚╩╝/;
+    $s =~ tr/ABCDM.efg.IKO.mrt.xyz/╠╣╟═╟.╔╦╗.║╬═.─╙╓.╚╩╝/;
   } elsif ($Style == 10) {
     # $s =~ tr/ABCD.efg.IKO.mrt.xyz/├┤├─.╭┬╮.│┼≡.─└┌.╰┴╯/;
     $s =~ tr/ABCDM.efg.IKO.mrt.xyz/├┤●─◎.╭┬╮.│┼≡.─■○.╰┴╯/;
   } elsif ($Style == 15) {
-    $s =~ tr/ABCD.efg.IKO.mrt.xyz/┣┫┣━.┏┳┓.┃╋☰.━┗┏.┗┻┛/;
+    # $s =~ tr/ABCD.efg.IKO.mrt.xyz/┣┫┣━.┏┳┓.┃╋☰.━┗┏.┗┻┛/;
+    $s =~ tr/ABCDM.efg.IKO.mrt.xyz/┣┫┣━┣.┏┳┓.┃╋☰.━┗┏.┗┻┛/;
   }
   return $s;
 }
