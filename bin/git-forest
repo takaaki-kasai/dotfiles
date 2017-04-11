@@ -61,6 +61,7 @@ my @Branch_colors_now = ();
 my $Hash_width = 8;
 my $Date_format = "%Y-%m-%d %H:%M";
 my $Date_width = 17;
+my $Graph_margin_right = 1;
 # my $Author_width = qx(sh -c "git shortlog -s | awk -F'\\t' '{print \\\$2}' | wc -L");
 # chomp $Author_width;
 
@@ -79,6 +80,7 @@ sub main
     "svdepth=i" => \$Subvine_depth,
     "style=i"   => \$Style,
     # "sha"       => \$With_sha,
+    "graph-margin-right=i"   => \$Graph_margin_right,
   );
   ++$Subvine_depth;
   if (substr($Pretty_fmt, 0, 7) ne "format:") {
@@ -165,7 +167,11 @@ sub process
       print &vis_post(&vis_commit($ra));
     }
 
-    print ' ', $Color{yellow}, $author, $Color{default};
+    for (my $i = 0; $i < $Graph_margin_right; $i++){
+      print ' ';
+    }
+
+    print $Color{yellow}, $author, $Color{default};
 
     if ($With_sha) {
       print $msg, $Color{at}, encode('UTF-8', "──("), $Color{sha}, $mini_sha,
