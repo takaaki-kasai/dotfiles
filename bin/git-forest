@@ -60,7 +60,8 @@ my @Branch_colors_ref = ('blue_bold', 'yellow_bold', 'magenta_bold', 'green_bold
 my @Branch_colors_now = ();
 my $Hash_width = 8;
 my $Date_format = "%Y-%m-%d %H:%M";
-my $Date_width = 17;
+my $Date_width = 16;
+my $Graph_margin_left = 2;
 my $Graph_margin_right = 1;
 # my $Author_width = qx(sh -c "git shortlog -s | awk -F'\\t' '{print \\\$2}' | wc -L");
 # chomp $Author_width;
@@ -80,6 +81,7 @@ sub main
     "svdepth=i" => \$Subvine_depth,
     "style=i"   => \$Style,
     # "sha"       => \$With_sha,
+    "graph-margin-left=i"   => \$Graph_margin_left,
     "graph-margin-right=i"   => \$Graph_margin_right,
   );
   ++$Subvine_depth;
@@ -153,7 +155,7 @@ sub process
 
     &vine_branch(\@vine, $sha);
 
-    print sprintf("$Color{magenta}%-${Hash_width}s $Color{blue}%-${Date_width}s $Color{default}", $hash, $date);
+    print sprintf("$Color{magenta}%-${Hash_width}s $Color{blue}%-${Date_width}s%${Graph_margin_left}s$Color{default}", $hash, $date, '');
 
     my $ra = &vine_commit(\@vine, $sha, \@parents);
 
@@ -305,7 +307,7 @@ sub vine_branch
   }
 
   &remove_trailing_blanks($vine);
-  print sprintf("%-${Hash_width}s %-${Date_width}s ", '', '');
+  print sprintf("%-${Hash_width}s %-${Date_width}s%${Graph_margin_left}s", '', '', '');
   print &vis_post(&vis_fan($ret, "branch")), "\n";
 }
 
@@ -492,7 +494,7 @@ sub vine_merge
     }
   }
 
-  print sprintf("%-${Hash_width}s %-${Date_width}s ", '', '');
+  print sprintf("%-${Hash_width}s %-${Date_width}s%${Graph_margin_left}s", '', '', '');
   print &vis_post(&vis_fan($ret, "merge")), "\n";
 }
 
