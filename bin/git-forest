@@ -640,9 +640,9 @@ sub vis_xfrm
     # $s =~ tr/ABCD.efg.IKO.mrt.xyz/┣┫┣━.┏┳┓.┃╋☰.━┗┏.┗┻┛/;
     $s =~ tr/ABCDM.efg.IKO.mrt.xyz/┣┫┣━┣.┏┳┓.┃╋☰.━┗┏.┗┻┛/;
   } elsif ($Style == 20) {
-    $s =~ tr/ABCDM.efg.IKO.mrt.xyz/├┤●─◎.┌┬┐.│┼≡.─■○.└┴┘/;
+    $s =~ tr/ABCDM.efg.IKO.mrt.xyz/├┤●─◎.┌┬┐.│┼═.─■○.└┴┘/;
   } elsif ($Style == 25) {
-    $s =~ tr/ABCDM.efg.IKO.mrt.xyz/├┤●─◎.╭┬╮.│┼≡.─■○.╰┴╯/;
+    $s =~ tr/ABCDM.efg.IKO.mrt.xyz/├┤●─◎.╭┬╮.│┼═.─■○.╰┴╯/;
   }
   return $s;
 }
