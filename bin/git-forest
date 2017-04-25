@@ -92,6 +92,30 @@ sub main
     "graph-symbol-overpass=s" => sub { $Graph_symbol_overpass = decode('UTF-8', $_[1]) },
     "graph-symbol-root=s"     => sub { $Graph_symbol_root     = decode('UTF-8', $_[1]) },
     "graph-symbol-tip=s"      => sub { $Graph_symbol_tip      = decode('UTF-8', $_[1]) },
+    "help"      => sub {
+      my $help;
+      my $script_name = $0;
+      $script_name =~ s/^.*\/([^\/]+)$/$1/;
+      $help = "Usage: $script_name [options]\n";
+      $help = $help . "      --help                              Show this help and exit.\n";
+      $help = $help . "      --no-rebase                         Do not show the rebase pseudo-refs.\n";
+      $help = $help . "      --svdepth=<Subvine depth>           Maximum length of merge subvines (default: 2).\n";
+      $help = $help . "      --style=<Style>                     Select <Style> from following.\n";
+      $help = $help . "                                            1   Use single-line visuals (default).\n";
+      $help = $help . "                                            2   Use double-line visuals.\n";
+      $help = $help . "                                            10  Use specific rounded Unicode visuals for edges.\n";
+      $help = $help . "                                            15  Use single bold-line visuals.\n";
+      $help = $help . "      --graph-margin-left=<Margin>        Left margin of the commit graph (default: 2).\n";
+      $help = $help . "      --graph-margin-right=<Margin>       Right margin of the commit graph (default: 1).\n";
+      $help = $help . "      --graph-symbol-commit=<Symbol>      Graph symbol of commit (default: ● ).\n";
+      $help = $help . "      --graph-symbol-merge=<Symbol>       Graph symbol of merge (default: ◎ ).\n";
+      $help = $help . "      --graph-symbol-overpass=<Symbol>    Graph symbol of overpass (default: ═ ).\n";
+      $help = $help . "      --graph-symbol-root=<Symbol>        Graph symbol of root (default: ■ ).\n";
+      $help = $help . "      --graph-symbol-tip=<Symbol>         Graph symbol of tip (default: ○ ).\n";
+      $help = $help . "  All other options and arguments are passed down to git-log. (e.g. --all)\n";
+      print encode('UTF-8', $help);
+      exit;
+    },
   );
   ++$Subvine_depth;
   if (substr($Pretty_fmt, 0, 7) ne "format:") {
