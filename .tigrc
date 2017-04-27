@@ -40,13 +40,16 @@ bind main bb !@?git branch "%(prompt New branch name to create: )" %(commit)
 bind main bc !@?git checkout -b "%(prompt New branch name to checkout: )" %(commit)
 bind main bm !@?git branch -m %(branch) "%(prompt Rename branch to: )"
 bind main co !@?git checkout %(branch)
+bind main cd !@?git checkout %(commit)
 bind main D !@?git branch -d %(branch)
 bind main ! !@?git branch -D %(branch)
 bind main mn !@?git merge --no-ff --no-edit %(branch)
 bind main mm !?git merge --no-ff %(branch)
+bind main mr !?git merge --no-ff "%(prompt Remote to merge: )/%(branch)"
 bind main mf !@?git merge --ff-only %(commit)
 bind main mt !sh -c "echo 'Testing for merge %(branch)...'; git mergetest %(branch)"
 bind main BB !@?git rebase -p %(commit)
+bind main BD !@?git rebase --ignore-date %(commit)
 bind main BI !?sh -c "echo 'Starting interactive rebase...'; git rebase -i %(commit)"
 bind main cp !@?git cherry-pick %(commit)
 bind main ddu :!git diff -M100% -C100%
