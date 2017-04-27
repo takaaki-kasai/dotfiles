@@ -222,7 +222,8 @@ esac
 alias tiga="tig --all"
 alias tigs="tig status"
 alias grep="grep --color=auto"
-alias git-forest='(){ git-forest --all $@ | less }'
+alias gifo='(){ git-forest --style=10 $@ | less }'
+alias gifa='(){ git-forest --all --style=10 $@ | less }'
 
 ### 環境変数 ############################################################
 #export JAVA_HOME=/usr/java/latest
