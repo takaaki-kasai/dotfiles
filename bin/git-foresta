@@ -6,9 +6,10 @@
 #
 #  Modified by Takaaki Kasai (@takaakikasai), 2017
 #
-#  This program is free software; you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation; either version 2 or 3 of the license.
+#  This program is free software; you can redistribute it and/or
+#  modify it under the terms of the GNU General Public License
+#  as published by the Free Software Foundation; either version 2
+#  of the License, or (at your option) any later version.
 #
 use Getopt::Long;
 use Git;
@@ -181,7 +182,7 @@ sub process
     chomp $line;
     my($sha, $mini_sha, $parents, $msg) =
       ($line =~ /^<(.*?)><(.*?)><(.*?)>(.*)/s);
-    my @next_sha = map { ($_) = /^<(.*?)>/ } @next_sha;
+    my @next_sha = map { ($_) = m{^<(.*?)>} } @next_sha;
     my @parents = split(" ", $parents);
     my ($hash, $time, $author, $msg) = split("\t", $msg);
     my $date = strftime $Date_format, localtime($time);
@@ -220,6 +221,20 @@ sub process
   $Repo->command_close_pipe($fh, $fhc);
 }
 
+sub get_next_pick
+{
+  my $fh = shift @_;
+  while (defined(my $line = <$fh>)) {
+    if ($line =~ /^\s*#/) {
+      next;
+    }
+    if ($line =~ /^\S+\s+(\S+)/) {
+      return $2;
+    }
+  }
+  return undef;
+}
+
 sub get_refs
 {
   my($fh, $c) = $Repo->command_output_pipe("show-ref");
@@ -248,24 +263,23 @@ sub get_refs
 
   $Repo->command_close_pipe($fh, $c);
 
-  my $rebase = -e $Repo->repo_path()."/.dotest-merge/git-rebase-todo" &&
+  my $rebase = -e $Repo->repo_path()."/rebase-merge/git-rebase-todo" &&
                $Show_rebase;
   if ($rebase) {
     if (open(my $act_fh, $Repo->repo_path().
-        "/.dotest-merge/git-rebase-todo")) {
+        "/rebase-merge/git-rebase-todo")) {
       my($curr) = (<$act_fh> =~ /^\S+\s+(\S+)/);
-      $curr = $Repo->command("rev-parse", $curr);
-      chomp $curr;
-      unshift(@{$ret->{$curr}}, "rebase/cn");
+      $curr = &get_next_pick($act_fh);
+      if (defined($curr)) {
+        $curr = $Repo->command("rev-parse", $curr);
+        chomp $curr;
+        unshift(@{$ret->{$curr}}, "rebase/next");
+      }
       close $act_fh;
     }
 
-    chomp(my $up   = $Repo->command("rev-parse", ".dotest-merge/upstream"));
-    chomp(my $onto = $Repo->command("rev-parse", ".dotest-merge/onto"));
-    chomp(my $old  = $Repo->command("rev-parse", ".dotest-merge/head"));
-    unshift(@{$ret->{$up}}, "rebase/upstream");
+    chomp(my $onto = $Repo->command("rev-parse", "rebase-merge/onto"));
     unshift(@{$ret->{$onto}}, "rebase/onto");
-    unshift(@{$ret->{$old}}, "rebase/saved-HEAD");
   }
 
   my $head = $Repo->command("rev-parse", "HEAD");
@@ -288,8 +302,12 @@ sub ref_print
     print $Color{at}, "[";
     if ($symbol eq "HEAD" || $symbol =~ m{^rebase/}) {
       print $Color{hhead}, $symbol;
-    } elsif ($symbol =~ m{^refs/(remotes/[^/]+)/(.*)}s) {
-      print $Color{remote}, $1, $Color{head}, "/$2";
+    } elsif ($symbol =~ m{^refs/remotes/([^/]+)/(.*)}s) {
+      if ($Color{remote} eq "") {
+        print "remotes/$1/$2";
+      } else {
+        print $Color{remote}, "$1/", $Color{head}, "$2";
+      }
     } elsif ($symbol =~ m{^refs/heads/(.*)}s) {
       print $Color{head}, $1;
     } elsif ($symbol =~ m{^refs/tags/(.*)}s) {
@@ -759,7 +777,6 @@ sub UNTIE
   my $self = shift @_;
   my $fh   = $self->{fh};
 
-  print $fh join($/, reverse split(/\n/s, $self->{saved}));
-  print $fh "\n";
+  print $fh join($/, reverse split(/\n/s, $self->{saved})), "\n";
   undef $self->{saved};
 }
