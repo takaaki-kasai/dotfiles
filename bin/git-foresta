@@ -26,14 +26,10 @@ my $Style         = 1;
 my $Subvine_depth = 2;
 my %Color         = (
   "default"      => "\e[0m",
-  "at"           => "\e[1;30m",
-  "hhead"        => "\e[1;31m",
-  "head"         => "\e[1;32m",
-  "ref"          => "\e[1;34m",
-  "remote"       => "\e[1;35m",
-  "sha"          => "\e[0;31m",
-  "tag"          => "\e[1;33m",
   "tree"         => "\e[0;36m",
+  "hash"         => "\e[0;35m",
+  "date"         => "\e[0;34m",
+  "author"       => "\e[0;33m",
 
   "black"        => "\e[0;30m",
   "red"          => "\e[0;31m",
@@ -181,7 +177,7 @@ sub process
 
     &vine_branch(\@vine, $sha);
 
-    print sprintf("$Color{magenta}%-${Hash_width}s $Color{blue}%-${Date_width}s%${Graph_margin_left}s$Color{default}", $hash, $date, '');
+    print sprintf("$Color{hash}%-${Hash_width}s $Color{date}%-${Date_width}s%${Graph_margin_left}s$Color{default}", $hash, $date, '');
 
     my $ra = &vine_commit(\@vine, $sha, \@parents);
     print &vis_post(&vis_commit($ra));
@@ -190,7 +186,7 @@ sub process
       print ' ';
     }
 
-    print $Color{yellow}, $author, $Color{default};
+    print $Color{author}, $author, $Color{default};
     print $msg, "\n";
 
     &vine_merge(\@vine, $sha, \@next_sha, \@parents);
