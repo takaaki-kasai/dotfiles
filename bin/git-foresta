@@ -24,7 +24,6 @@ my $Show_all      = 0;
 my $Show_rebase   = 1;
 my $Style         = 1;
 my $Subvine_depth = 2;
-my $With_sha      = 0;
 my %Color         = (
   "default" => "\e[0m", # ]
   "at"      => "\e[1;30m", # ]
@@ -185,25 +184,14 @@ sub process
     print sprintf("$Color{magenta}%-${Hash_width}s $Color{blue}%-${Date_width}s%${Graph_margin_left}s$Color{default}", $hash, $date, '');
 
     my $ra = &vine_commit(\@vine, $sha, \@parents);
-
-    if (exists($refs->{$sha})) {
-      print &vis_post(&vis_commit($ra));
-    } else {
-      print &vis_post(&vis_commit($ra));
-    }
+    print &vis_post(&vis_commit($ra));
 
     for (my $i = 0; $i < $Graph_margin_right; $i++){
       print ' ';
     }
 
     print $Color{yellow}, $author, $Color{default};
-
-    if ($With_sha) {
-      print $msg, $Color{at}, encode('UTF-8', "──("), $Color{sha}, $mini_sha,
-            $Color{at}, ")", $Color{default}, "\n";
-    } else {
-      print $msg, "\n";
-    }
+    print $msg, "\n";
 
     &vine_merge(\@vine, $sha, \@next_sha, \@parents);
   }
