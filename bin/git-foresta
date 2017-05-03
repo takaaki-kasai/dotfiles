@@ -18,7 +18,7 @@ use utf8;
 use Encode qw(encode decode);
 use POSIX qw(strftime);
 my $Repo          = Git->repository($ENV{"GIT_DIR"} || ".");
-my $Pretty_fmt    = "format:%h\t%at\t%an\t%C(reset)%C(auto)%d%C(reset) %s ";
+my $Pretty_fmt    = "format:%h\t%at\t%an\t%C(reset)%C(auto)%d%C(reset)\t%s";
 my $Reverse_order = 0;
 my $Show_all      = 0;
 my $Show_rebase   = 1;
@@ -172,7 +172,7 @@ sub process
       ($line =~ /^<(.*?)><(.*?)><(.*?)>(.*)/s);
     my @next_sha = map { ($_) = m{^<(.*?)>} } @next_sha;
     my @parents = split(" ", $parents);
-    my ($hash, $time, $author, $msg) = split("\t", $msg);
+    my ($hash, $time, $author, $auto_refs, $msg) = split("\t", $msg, 5);
     my $date = strftime $Date_format, localtime($time);
 
     &vine_branch(\@vine, $sha);
@@ -187,7 +187,7 @@ sub process
     }
 
     print $Color{author}, $author, $Color{default};
-    print $msg, "\n";
+    print $auto_refs, ' ', $msg, "\n";
 
     &vine_merge(\@vine, $sha, \@next_sha, \@parents);
   }
