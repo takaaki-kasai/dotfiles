@@ -129,6 +129,8 @@ sub main
   }
   if (keys %Color > 0) {
     unshift(@ARGV, '--color');
+  } else {
+    unshift(@ARGV, '--no-color');
   }
   if ($Reverse_order) {
     tie(*STDOUT, "ReverseOutput");
