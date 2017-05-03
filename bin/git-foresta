@@ -70,7 +70,8 @@ sub main
   &GetOptions(
     "all"                     => \$Show_all,
     "no-color"                => sub { %Color = (); },
-    "no-rebase"               => sub { $Show_rebase = 0; },
+    "pretty=s"                => sub {}, # ignore
+    "format=s"                => sub {}, # ignore
     "reverse"                 => \$Reverse_order,
     "svdepth=i"               => \$Subvine_depth,
     "style=i"                 => \$Style,
@@ -87,7 +88,6 @@ sub main
       $script_name =~ s/^.*\/([^\/]+)$/$1/;
       $help = "Usage: $script_name [options]\n";
       $help = $help . "      --help                              Show this help and exit.\n";
-      $help = $help . "      --no-rebase                         Do not show the rebase pseudo-refs.\n";
       $help = $help . "      --svdepth=<Subvine depth>           Maximum length of merge subvines (default: 2).\n";
       $help = $help . "      --style=<Style>                     Select <Style> from following.\n";
       $help = $help . "                                            1   Use single-line visuals (default).\n";
@@ -101,7 +101,7 @@ sub main
       $help = $help . "      --graph-symbol-overpass=<Symbol>    Graph symbol of overpass (default: ═ ).\n";
       $help = $help . "      --graph-symbol-root=<Symbol>        Graph symbol of root (default: ■ ).\n";
       $help = $help . "      --graph-symbol-tip=<Symbol>         Graph symbol of tip (default: ○ ).\n";
-      $help = $help . "  All other options and arguments are passed down to git-log. (e.g. --all)\n";
+      $help = $help . "  All other options and arguments (except --pretty or --format) are passed down to git-log. (e.g. --all)\n";
       print encode('UTF-8', $help);
       exit;
     },
