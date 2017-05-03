@@ -136,6 +136,50 @@ sub main
   }
 }
 
+sub get_status
+{
+  my $dirty = '';
+  my $mid_flow = '';
+  my $repo_path = $Repo->repo_path();
+
+  my $has_change_unstaged = length($Repo->command('diff', '--shortstat'));
+  my $has_change_staged = length($Repo->command('diff', '--shortstat', '--cached'));
+  my $has_stash = length($Repo->command('stash', 'list'));
+  my $has_untracked = length($Repo->command('ls-files', '--others', '--exclude-standard'));
+
+  $dirty = $dirty . '*' if $has_change_unstaged;
+  $dirty = $dirty . '+' if $has_change_staged;
+  $dirty = $dirty . '$' if $has_stash;
+  $dirty = $dirty . '%' if $has_untracked;
+  $dirty = ' ' . $dirty if length($dirty);
+
+  if (-d "$repo_path/rebase-merge") {
+    if (-f "$repo_path/rebase-merge/interactive") {
+      $mid_flow = "|REBASE-i";
+    } else {
+      $mid_flow = "|REBASE-m";
+    }
+  } elsif (-d "$repo_path/rebase-apply") {
+    if (-f "$repo_path/rebase-apply/rebasing") {
+      $mid_flow = "|REBASE";
+    } elsif (-f "$repo_path/rebase-apply/applying") {
+      $mid_flow = "|AM";
+    } else {
+      $mid_flow = "|AM/REBASE";
+    }
+  } elsif (-f "$repo_path/MERGE_HEAD") {
+    $mid_flow = "|MERGING";
+  } elsif (-f "$repo_path/CHERRY_PICK_HEAD") {
+    $mid_flow = "|CHERRY-PICKING";
+  } elsif (-f "$repo_path/REVERT_HEAD") {
+    $mid_flow = "|REVERTING";
+  } elsif (-f "$repo_path/BISECT_LOG") {
+    $mid_flow = "|BISECTING";
+  }
+
+  return $dirty . $mid_flow;
+}
+
 sub get_line_block
 {
   my($fh, $max) = @_;
@@ -161,6 +205,7 @@ sub process
 {
   my(@vine);
   my $refs = &get_refs();
+  my $status = &get_status();
   my($fh, $fhc) = $Repo->command_output_pipe("log", "--date-order",
                   "--pretty=format:<%H><%h><%P>$Pretty_fmt", @ARGV);
 
@@ -190,6 +235,7 @@ sub process
     print $Color{author}, $author, $Color{default};
 
     if (exists($refs->{$sha})) {
+      $auto_refs =~ s/[^\/]HEAD/$&$status/ if (grep { $_ eq 'HEAD' } @{$refs->{$sha}});
       $auto_refs =~ s/\x1b\[\d;\d\dm(?=tag: )/$Color{tag}/g if (grep { m{^refs/tags/}s } @{$refs->{$sha}});
     }
 
