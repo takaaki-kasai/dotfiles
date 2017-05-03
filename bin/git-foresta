@@ -30,6 +30,7 @@ my %Color         = (
   "hash"         => "\e[0;35m",
   "date"         => "\e[0;34m",
   "author"       => "\e[0;33m",
+  "tag"          => "\e[1;35m",
 
   "black"        => "\e[0;30m",
   "red"          => "\e[0;31m",
@@ -187,6 +188,11 @@ sub process
     }
 
     print $Color{author}, $author, $Color{default};
+
+    if (exists($refs->{$sha})) {
+      $auto_refs =~ s/\x1b\[\d;\d\dm(?=tag: )/$Color{tag}/g if (grep { m{^refs/tags/}s } @{$refs->{$sha}});
+    }
+
     print $auto_refs, ' ', $msg, "\n";
 
     &vine_merge(\@vine, $sha, \@next_sha, \@parents);
