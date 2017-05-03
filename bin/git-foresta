@@ -22,6 +22,7 @@ my $Pretty_fmt    = "format:%h\t%at\t%an\t%C(reset)%C(auto)%d%C(reset)\t%s";
 my $Reverse_order = 0;
 my $Show_all      = 0;
 my $Show_rebase   = 1;
+my $Show_status   = 1;
 my $Style         = 1;
 my $Subvine_depth = 2;
 my %Color         = (
@@ -71,6 +72,7 @@ sub main
   &GetOptions(
     "all"                     => \$Show_all,
     "no-color"                => sub { %Color = (); },
+    "no-status"               => sub { $Show_status = 0; },
     "pretty=s"                => sub {}, # ignore
     "format=s"                => sub {}, # ignore
     "reverse"                 => \$Reverse_order,
@@ -90,6 +92,7 @@ sub main
       $help = "Usage: $script_name [options]\n";
       $help = $help . "      --help                              Show this help and exit.\n";
       $help = $help . "      --svdepth=<Subvine depth>           Maximum length of merge subvines (default: 2).\n";
+      $help = $help . "      --no-status                         Do not show the working tree status near HEAD.\n";
       $help = $help . "      --style=<Style>                     Select <Style> from following.\n";
       $help = $help . "                                            1   Use single-line visuals (default).\n";
       $help = $help . "                                            2   Use double-line visuals.\n";
@@ -205,7 +208,7 @@ sub process
 {
   my(@vine);
   my $refs = &get_refs();
-  my $status = &get_status();
+  my $status = &get_status() if $Show_status;
   my($fh, $fhc) = $Repo->command_output_pipe("log", "--date-order",
                   "--pretty=format:<%H><%h><%P>$Pretty_fmt", @ARGV);
 
@@ -235,7 +238,7 @@ sub process
     print $Color{author}, $author, $Color{default};
 
     if (exists($refs->{$sha})) {
-      $auto_refs =~ s/[^\/]HEAD/$&$status/ if (grep { $_ eq 'HEAD' } @{$refs->{$sha}});
+      $auto_refs =~ s/[^\/]HEAD/$&$status/ if $Show_status && (grep { $_ eq 'HEAD' } @{$refs->{$sha}});
       $auto_refs =~ s/\x1b\[\d;\d\dm(?=tag: )/$Color{tag}/g if (grep { m{^refs/tags/}s } @{$refs->{$sha}});
     }
 
