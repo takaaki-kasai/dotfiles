@@ -55,7 +55,7 @@ if [ `uname` = 'Darwin' ]; then
   # Mac用のコード
   git config --global core.editor 'env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim'
   git config --global diff.tool 'macvim'
-  git config --global difftool.macvim.cmd 'env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/vimdiff $LOCAL $REMOTE'
+  git config --global difftool.macvim.cmd 'env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -d $LOCAL $REMOTE'
   ln -sf ~/dotfiles/.karabiner/private.xml ~/Library/Application\ Support/Karabiner/private.xml
 elif [ `uname` = 'Linux' ]; then
   # Linux用のコード
