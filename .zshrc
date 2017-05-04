@@ -50,7 +50,16 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 fpath=(~/.zsh $fpath)
 
 autoload -U compinit    # 機能の読み込み
-compinit                # 機能の実行
+case "${OSTYPE}" in
+    darwin*)
+        # Mac
+        compinit -u     # 機能の実行(権限チェックを省略)
+        ;;
+    linux*)
+        # Linux
+        compinit        # 機能の実行
+        ;;
+esac
 
 #allow tab completion in the middle of a word
 setopt COMPLETE_IN_WORD
