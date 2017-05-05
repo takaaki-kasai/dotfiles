@@ -254,5 +254,11 @@ if [ -d /usr/local/rbenv ]; then
     eval "$(rbenv init --no-rehash -)"
 fi
 
+# for plenv
+if [ -d "$HOME/.plenv" ]; then
+    export PATH="$HOME/.plenv/bin:$PATH"
+    eval "$(plenv init -)"
+fi
+
 # for nodebrew
 export PATH=$HOME/.nodebrew/current/bin:$PATH
