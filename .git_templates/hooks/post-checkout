@@ -1,0 +1,51 @@
+#!/bin/bash
+
+PREVIOUS_HEAD=$1
+NEW_HEAD=$2
+BRANCH_SWITCH=$3
+Z40="0000000000000000000000000000000000000000"
+
+# Continue only when "git clone" has been executed.
+if [ "$PREVIOUS_HEAD" != "$Z40" -o "$BRANCH_SWITCH" != "1" ]; then
+  exit
+fi
+
+PERSONAL_EMAIL_USER=`echo 'uvtu.evire' | tr nopqrstuvwxyzabcdefghijklm abcdefghijklmnopqrstuvwxyz`
+PERSONAL_EMAIL_ATMARK='@'
+PERSONAL_EMAIL_DOMAIN=`echo 'tznvy.pbz' | tr nopqrstuvwxyzabcdefghijklm abcdefghijklmnopqrstuvwxyz`
+PERSONAL_EMAIL="$PERSONAL_EMAIL_USER$PERSONAL_EMAIL_ATMARK$PERSONAL_EMAIL_DOMAIN"
+UNDEFIND_EMAIL='undefind@example.com'
+UNDEFIND_NAME='UNDEFIND'
+
+origin_name="$(git remote | head -1)"
+current_remote_url="$(git config --get --local remote.$origin_name.url)"
+default_name="$(git config --get user.name)"
+default_email="$(git config --get user.email)"
+local_email="$(git config --local --get user.email)"
+
+if [ "$current_remote_url" ]; then
+  if [ -z "$local_email" ]; then
+    if [[ $current_remote_url =~ ^git@github.com: || $current_remote_url =~ ^https://github.com/ ]]; then
+      email=$PERSONAL_EMAIL
+    elif [[ $current_remote_url =~ ^git@10\.30\.[0-9]{1,3}\.[0-9]{1,3}: || $current_remote_url =~ ^ssh://tkasai@na-git/ ]]; then
+      email=$default_email
+    else
+      email=$UNDEFIND_EMAIL
+    fi
+
+    if [ "$email" != "$default_email" ]; then
+      git config --local user.email "$email"
+      echo "user.email was set as $email"
+    else
+      echo "user.email was left untouched ($default_email)"
+    fi
+    if [ "$email" = "$UNDEFIND_EMAIL" ]; then
+      git config --local user.name $UNDEFIND_NAME
+      echo "user.name was set as $UNDEFIND_NAME"
+    else
+      echo "user.name was left untouched ($default_name)"
+    fi
+  fi
+else
+  echo "No remote URL"
+fi

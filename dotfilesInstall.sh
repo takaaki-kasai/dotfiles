@@ -11,6 +11,7 @@ cd ~
 git_user_name=$(git config --global user.name)
 git_user_email=$(git config --global user.email)
 rm -f ~/.gitconfig
+git config --global init.templatedir '~/.git_templates'
 git config --global user.name "$git_user_name"
 git config --global user.email "$git_user_email"
 git config --global diff.algorithm 'histogram'
@@ -36,6 +37,7 @@ git config --global alias.mergetest '!f(){ git merge $1 --no-commit --no-ff; loc
 ln -sf ~/dotfiles/.zprofile ~/.zprofile
 ln -sf ~/dotfiles/.zshrc ~/.zshrc
 ln -snf ~/dotfiles/.zsh ~/.zsh
+ln -snf ~/dotfiles/.git_templates ~/.git_templates
 ln -sf ~/dotfiles/.vimrc ~/.vimrc
 ln -sf ~/dotfiles/.gvimrc ~/.gvimrc
 ln -snf ~/dotfiles/.vim ~/.vim
