@@ -233,8 +233,8 @@ alias tigs="tig status"
 alias grep="grep --color=auto"
 
 # alias as function
-function gifo() { git-foresta --style=10 $@ | less }
-function gifa() { git-foresta --all --style=10 $@ | less }
+function gifo() { git-foresta --style=10 "$@" | less }
+function gifa() { git-foresta --all --style=10 "$@" | less }
 compdef _git gifo=git-log
 compdef _git gifa=git-log
 
