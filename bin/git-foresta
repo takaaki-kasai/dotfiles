@@ -58,7 +58,8 @@ unshift @INC, bless \%fatpacked, $class;
 #  text-based tree visualisation
 #  Copyright © Jan Engelhardt <jengelh [at] medozas de>, 2008
 #
-#  Modified by Takaaki Kasai (@takaakikasai), 2017
+#  Modified work:
+#  Copyright (C) 2017 Takaaki Kasai <high.river "\x40" gmail com>
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
@@ -71,8 +72,10 @@ use strict;
 use utf8;
 use Encode qw(encode_utf8 decode_utf8);
 use POSIX qw(strftime);
+my $Program_name  = 'git-foresta';
+my $Version       = '1.1.0';
 my $Repo          = Git->repository($ENV{"GIT_DIR"} || ".");
-my $Pretty_fmt    = "format:%h\t%at\t%an\t%C(reset)%C(auto)%d%C(reset)\t%s";
+my $Pretty_fmt    = "format:%H\t%at\t%an\t%C(reset)%C(auto)%d%C(reset)\t%s";
 my $Reverse_order = 0;
 my $Show_all      = 0;
 my $Show_rebase   = 1;
@@ -107,7 +110,8 @@ my %Color         = (
 );
 my @Branch_colors_ref     = ('blue_bold', 'yellow_bold', 'magenta_bold', 'green_bold', 'cyan_bold');
 my @Branch_colors_now     = ();
-my $Hash_width            = 8;
+my $Hash_min_width        = 8;
+my $Hash_width            = 0; # zero means auto
 my $Date_format           = "%Y-%m-%d %H:%M";
 my $Date_width            = 16;
 my $Graph_margin_left     = 2;
@@ -133,6 +137,7 @@ sub main
     "pretty=s"                => sub {}, # ignore
     "format=s"                => sub {}, # ignore
     "reverse"                 => \$Reverse_order,
+    "abbrev=i"                => \$Hash_min_width,
     "svdepth=i"               => \$Subvine_depth,
     "style=i"                 => \$Style,
     "graph-margin-left=i"     => \$Graph_margin_left,
@@ -142,11 +147,13 @@ sub main
     "graph-symbol-overpass=s" => sub { $Graph_symbol_overpass = decode_utf8($_[1]) },
     "graph-symbol-root=s"     => sub { $Graph_symbol_root     = decode_utf8($_[1]) },
     "graph-symbol-tip=s"      => sub { $Graph_symbol_tip      = decode_utf8($_[1]) },
+    "version"                 => sub {
+      print "$Program_name version $Version\n";
+      exit;
+    },
     "help"                    => sub {
       my $help;
-      my $script_name = $0;
-      $script_name =~ s/^.*\/([^\/]+)$/$1/;
-      $help = "Usage: $script_name [options]\n";
+      $help = "Usage: $Program_name [options]\n";
       $help = $help . "      --help                              Show this help and exit.\n";
       $help = $help . "      --svdepth=<Subvine depth>           Maximum length of merge subvines (default: 2).\n";
       $help = $help . "      --no-status                         Do not show the working tree status near HEAD.\n";
@@ -162,6 +169,7 @@ sub main
       $help = $help . "      --graph-symbol-overpass=<Symbol>    Graph symbol of overpass (default: ═ ).\n";
       $help = $help . "      --graph-symbol-root=<Symbol>        Graph symbol of root (default: ■ ).\n";
       $help = $help . "      --graph-symbol-tip=<Symbol>         Graph symbol of tip (default: ○ ).\n";
+      $help = $help . "      --version                           Print the version number and exit.\n";
       $help = $help . "  All other options and arguments (except --pretty or --format) are passed down to git-log. (e.g. --all)\n";
       print encode_utf8($help);
       exit;
@@ -188,6 +196,13 @@ sub main
     unshift @ARGV, '--color';
   } else {
     unshift @ARGV, '--no-color';
+  }
+  if ($Hash_width) {
+    $Hash_width = 4 if $Hash_width < 4;
+    $Hash_width = 40 if $Hash_width > 40;
+  } else {
+    $Hash_min_width = 40 if $Hash_min_width > 40;
+    $Hash_width = maxof($Hash_min_width ,length chomped_str($Repo->command('rev-parse', '--short', 'HEAD')));
   }
 
   tie *STDOUT, "ReverseOutput" if $Reverse_order;
@@ -278,7 +293,7 @@ sub process
 
     vine_branch(\@vine, $sha);
 
-    printf "$Color{hash}%-${Hash_width}s $Color{date}%-${Date_width}s%${Graph_margin_left}s$Color{default}", $hash, $date, '';
+    printf "$Color{hash}%-${Hash_width}.${Hash_width}s $Color{date}%-${Date_width}s%${Graph_margin_left}s$Color{default}", $hash, $date, '';
 
     my $ra = vine_commit(\@vine, $sha, \@parents);
     print vis_post(vis_commit($ra));
@@ -397,7 +412,7 @@ sub vine_branch
   return if $matched < 2;
 
   remove_trailing_blanks($vine);
-  printf "%-${Hash_width}s %-${Date_width}s%${Graph_margin_left}s", '', '', '';
+  printf "%-${Hash_width}.${Hash_width}s %-${Date_width}s%${Graph_margin_left}s", '', '', '';
   print vis_post(vis_fan($ret, "branch")), "\n";
 }
 
@@ -576,7 +591,7 @@ sub vine_merge
     }
   }
 
-  printf "%-${Hash_width}s %-${Date_width}s%${Graph_margin_left}s", '', '', '';
+  printf "%-${Hash_width}.${Hash_width}s %-${Date_width}s%${Graph_margin_left}s", '', '', '';
   print vis_post(vis_fan($ret, "merge")), "\n";
 }
 
@@ -757,6 +772,18 @@ sub str_expand
   my ($r, $l) = @_;
 
   $$r .= " " x ($l - length $$r) if length $$r < $l;
+}
+
+sub chomped_str {
+  my $str = $_[0];
+  chomp $str;
+  return $str;
+}
+
+sub maxof
+{
+  my ($x, $y) = @_;
+  return ($x > $y) ? $x : $y;
 }
 
 sub trgen {
