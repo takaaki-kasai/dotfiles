@@ -206,6 +206,7 @@ alias rm="rm -i"
 alias cp="cp -i"
 alias mv="mv -i"
 alias crontab="crontab -i"
+
 case "${OSTYPE}" in
     darwin*)
         # Mac
@@ -222,11 +223,12 @@ case "${OSTYPE}" in
         alias ls="ls -hF --color=auto"
         alias la="ls -hAF --color=auto"
         alias ll="ls -lhAF --color=auto"
-        if [ -x `which colordiff` ]; then
-            alias diff=colordiff
-        fi
         ;;
 esac
+
+if [ -x `which colordiff` ]; then
+    alias diff="colordiff -u"
+fi
 
 alias tiga="tig --all"
 alias tigs="tig status"
