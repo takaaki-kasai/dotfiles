@@ -241,6 +241,10 @@ function gifa() { git-foresta --all --style=10 "$@" | less }
 compdef _git gifo=git-log
 compdef _git gifa=git-log
 
+function agg() { ag "$@" $(git ls-files) }
+function agl() { ag -l "$@" $(git ls-files) }
+function agv() { vim -p $(ag -l "$@" $(git ls-files)) }
+
 ### 環境変数 ############################################################
 #export JAVA_HOME=/usr/java/latest
 #export XKEYSYMDB=/usr/share/X11/XKeysymDB
