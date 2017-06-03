@@ -215,6 +215,7 @@ case "${OSTYPE}" in
         alias ll="ls -lhAFG"
         if [ -d /Applications/MacVim.app ]; then
             alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+            alias view='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -R "$@"'
             alias vimdiff='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -d "$@"'
         fi
         ;;
@@ -226,7 +227,7 @@ case "${OSTYPE}" in
         ;;
 esac
 
-if [ -x `which colordiff` ]; then
+if [ -x "$(which colordiff)" ]; then
     alias diff="colordiff -u"
 fi
 
