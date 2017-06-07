@@ -284,52 +284,110 @@ let g:PHP_vintage_case_default_indent = 1
 autocmd FileType php setlocal iskeyword-=-
 
 " NeoBundle -----------------------------------------------------------------
-set nocompatible               " be iMproved
-filetype off                   " required!
+" set nocompatible               " be iMproved
+" filetype off                   " required!
 
-if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
+" if has('vim_starting')
+"   set runtimepath+=~/.vim/bundle/neobundle.vim/
+" endif
 
-call neobundle#begin(expand('~/.vim/bundle/'))
+" call neobundle#begin(expand('~/.vim/bundle/'))
 
-NeoBundleFetch 'Shougo/neobundle.vim' " Let NeoBundle manage NeoBundle
+" NeoBundleFetch 'Shougo/neobundle.vim' " Let NeoBundle manage NeoBundle
 
-NeoBundle 'matchit.zip'
-NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimfiler.vim'
-NeoBundle 'Shougo/vimproc.vim', {
-      \   'build': {
-      \     'mac': 'make -f make_mac.mak',
-      \     'linux': 'make',
-      \   },
-      \ }
-NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'othree/eregex.vim'
-NeoBundle 'othree/html5.vim'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'tyru/caw.vim.git'
-NeoBundle 'vim-scripts/diffchar.vim'
-NeoBundle 'vim-scripts/DirDiff.vim'
-NeoBundle 'rking/ag.vim'
-NeoBundle 'cohama/agit.vim'
-NeoBundle 'thinca/vim-qfreplace'
-NeoBundle 'gabrielelana/vim-markdown'
-NeoBundle 'vim-scripts/AnsiEsc.vim'
-NeoBundle 'itchyny/vim-parenmatch'
-NeoBundle 'itchyny/vim-cursorword'
+" NeoBundle 'matchit.zip'
+" NeoBundle 'Shougo/neocomplete.vim'
+" NeoBundle 'Shougo/unite.vim'
+" NeoBundle 'Shougo/vimfiler.vim'
+" NeoBundle 'Shougo/vimproc.vim', {
+"       \   'build': {
+"       \     'mac': 'make -f make_mac.mak',
+"       \     'linux': 'make',
+"       \   },
+"       \ }
+" NeoBundle 'altercation/vim-colors-solarized'
+" NeoBundle 'itchyny/lightline.vim'
+" NeoBundle 'othree/eregex.vim'
+" NeoBundle 'othree/html5.vim'
+" NeoBundle 'kchmck/vim-coffee-script'
+" NeoBundle 'tpope/vim-fugitive'
+" NeoBundle 'scrooloose/syntastic'
+" NeoBundle 'tyru/caw.vim.git'
+" NeoBundle 'vim-scripts/diffchar.vim'
+" NeoBundle 'vim-scripts/DirDiff.vim'
+" NeoBundle 'rking/ag.vim'
+" NeoBundle 'cohama/agit.vim'
+" NeoBundle 'thinca/vim-qfreplace'
+" NeoBundle 'gabrielelana/vim-markdown'
+" NeoBundle 'vim-scripts/AnsiEsc.vim'
+" NeoBundle 'itchyny/vim-parenmatch'
+" NeoBundle 'itchyny/vim-cursorword'
 
-call neobundle#end()
+" call neobundle#end()
 
-filetype plugin indent on     " required!
-NeoBundleCheck
+" filetype plugin indent on     " required!
+" NeoBundleCheck
 " End of NeoBundle -----------------------------------------------------------------
 
 " dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
+" Required:
+set runtimepath+=~/.vim/bundle/repos/github.com/Shougo/dein.vim
+
+" Required:
+if dein#load_state('~/.vim/bundle')
+  call dein#begin('~/.vim/bundle')
+
+  " Let dein manage dein
+  " Required:
+  call dein#add('~/.vim/bundle/repos/github.com/Shougo/dein.vim')
+
+  " Add or remove your plugins here:
+  call dein#add('vim-scripts/matchit.zip')
+  call dein#add('Shougo/neocomplete.vim')
+  call dein#add('Shougo/unite.vim')
+  call dein#add('Shougo/vimfiler.vim')
+  call dein#add('Shougo/vimproc.vim', {
+        \   'build': {
+        \     'mac': 'make -f make_mac.mak',
+        \     'linux': 'make',
+        \   },
+        \ })
+  call dein#add('altercation/vim-colors-solarized')
+  call dein#add('itchyny/lightline.vim')
+  call dein#add('othree/eregex.vim')
+  call dein#add('othree/html5.vim')
+  call dein#add('kchmck/vim-coffee-script')
+  call dein#add('tpope/vim-fugitive')
+  call dein#add('scrooloose/syntastic')
+  call dein#add('tyru/caw.vim.git')
+  call dein#add('vim-scripts/diffchar.vim')
+  call dein#add('vim-scripts/DirDiff.vim')
+  call dein#add('rking/ag.vim')
+  call dein#add('cohama/agit.vim')
+  call dein#add('thinca/vim-qfreplace')
+  call dein#add('gabrielelana/vim-markdown')
+  call dein#add('vim-scripts/AnsiEsc.vim')
+  call dein#add('itchyny/vim-parenmatch')
+  call dein#add('itchyny/vim-cursorword')
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
+
+" Required:
+filetype plugin indent on
+syntax enable
+
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+ call dein#install()
+endif
+
 " End dein Scripts-------------------------
 
 " vim-colors-solarized -----------------------------------------------------------------
