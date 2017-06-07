@@ -350,12 +350,7 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('Shougo/neocomplete.vim')
   call dein#add('Shougo/unite.vim')
   call dein#add('Shougo/vimfiler.vim')
-  call dein#add('Shougo/vimproc.vim', {
-        \   'build': {
-        \     'mac': 'make -f make_mac.mak',
-        \     'linux': 'make',
-        \   },
-        \ })
+  call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
   call dein#add('altercation/vim-colors-solarized')
   call dein#add('itchyny/lightline.vim')
   call dein#add('othree/eregex.vim')
