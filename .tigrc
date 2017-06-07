@@ -114,5 +114,8 @@ set pager-view-line-number = yes,interval=1
 # コミットの並び順
 set commit-order = date
 
+# 検索時に大文字が含まれている場合のみ大文字小文字を区別する
+set ignore-case = smart-case            # Enum: no, yes, smart-case
+
 # 描画更新のタイミング
 # set refresh-mode = after-command
