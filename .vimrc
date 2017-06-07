@@ -327,6 +327,10 @@ call neobundle#end()
 
 filetype plugin indent on     " required!
 NeoBundleCheck
+" End of NeoBundle -----------------------------------------------------------------
+
+" dein Scripts-----------------------------
+" End dein Scripts-------------------------
 
 " vim-colors-solarized -----------------------------------------------------------------
 let g:solarized_visibility = "low"
