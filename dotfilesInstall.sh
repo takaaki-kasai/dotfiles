@@ -1,7 +1,7 @@
 #! /bin/bash
-EMAIL_USER=`echo 'uvtu.evire' | tr nopqrstuvwxyzabcdefghijklm abcdefghijklmnopqrstuvwxyz`
+EMAIL_USER=$(echo 'uvtu.evire' | tr nopqrstuvwxyzabcdefghijklm abcdefghijklmnopqrstuvwxyz)
 EMAIL_ATMARK='@'
-EMAIL_DOMAIN=`echo 'tznvy.pbz' | tr nopqrstuvwxyzabcdefghijklm abcdefghijklmnopqrstuvwxyz`
+EMAIL_DOMAIN=$(echo 'tznvy.pbz' | tr nopqrstuvwxyzabcdefghijklm abcdefghijklmnopqrstuvwxyz)
 
 cd ~/dotfiles
 git config user.name 'Takaaki Kasai'
@@ -28,11 +28,11 @@ git config --global alias.dts 'difftool -M100% -C100% --cached'
 git config --global alias.l 'log --graph --all --date=short --date-order --abbrev=8 --format="%C(yellow)%h%C(reset) %C(magenta)[%ad]%C(reset)%C(auto)%d%C(reset) %s %C(cyan)@%an%C(reset)"'
 git config --global alias.lb 'log --graph --date=short --date-order --abbrev=8 --format="%C(yellow)%h%C(reset) %C(magenta)[%ad]%C(reset)%C(auto)%d%C(reset) %s %C(cyan)@%an%C(reset)"'
 git config --global alias.s 'status'
-# git config --global alias.pushall '!f(){ for i in `git remote`; do git push $i $1; done; };f'
-git config --global alias.pushmulti '!f(){ for i in `echo "$1" | tr "," " "`; do echo "--- Pushing $2 to $i"; git push $i $2; echo ""; done; };f'
-git config --global alias.pushforcemulti '!f(){ for i in `echo "$1" | tr "," " "`; do echo "--- Force Pushing $2 to $i"; git push -f $i $2; echo ""; done; };f'
-git config --global alias.pushdeletemulti '!f(){ for i in `echo "$1" | tr "," " "`; do echo "--- Deleting $2 from $i"; git push $i :$2; echo ""; done; };f'
-git config --global alias.fetchall '!f(){ for i in `git remote`; do echo "--- Fetching from $i"; git fetch --prune $i; echo ""; done; };f'
+# git config --global alias.pushall '!f(){ for i in $(git remote); do git push $i $1; done; };f'
+git config --global alias.pushmulti '!f(){ for i in $(echo "$1" | tr "," " "); do echo "--- Pushing $2 to $i"; git push $i $2; echo ""; done; };f'
+git config --global alias.pushforcemulti '!f(){ for i in $(echo "$1" | tr "," " "); do echo "--- Force Pushing $2 to $i"; git push -f $i $2; echo ""; done; };f'
+git config --global alias.pushdeletemulti '!f(){ for i in $(echo "$1" | tr "," " "); do echo "--- Deleting $2 from $i"; git push $i :$2; echo ""; done; };f'
+git config --global alias.fetchall '!f(){ for i in $(git remote); do echo "--- Fetching from $i"; git fetch --prune $i; echo ""; done; };f'
 git config --global alias.mergetest '!f(){ git merge $1 --no-commit --no-ff; local ret=$?; [ -f $(git rev-parse --git-dir)/MERGE_HEAD ] && git merge --abort && /bin/echo "Merge aborted"; if [ $ret -eq 0 ]; then /bin/echo -e "\e[32mMerge test: OK\e[m"; else /bin/echo -e "\e[31mMerge test: FAILED\e[m"; fi; }; f'
 ln -sf ~/dotfiles/.zprofile ~/.zprofile
 ln -sf ~/dotfiles/.zshrc ~/.zshrc
@@ -53,13 +53,13 @@ ln -sf ~/dotfiles/bin/git-diff-normal-format ~/bin/git-diff-normal-format
 ln -sf ~/dotfiles/bin/git-foresta ~/bin/git-foresta
 ln -sf ~/dotfiles/bin/rubocop ~/bin/rubocop
 
-if [ `uname` = 'Darwin' ]; then
+if [ $(uname) = 'Darwin' ]; then
   # Mac用のコード
   git config --global core.editor 'env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim'
   git config --global diff.tool 'macvim'
   git config --global difftool.macvim.cmd 'env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -d $LOCAL $REMOTE'
   ln -sf ~/dotfiles/.karabiner/private.xml ~/Library/Application\ Support/Karabiner/private.xml
-elif [ `uname` = 'Linux' ]; then
+elif [ $(uname) = 'Linux' ]; then
   # Linux用のコード
   git config --global core.editor 'vim'
   git config --global diff.tool 'vimdiff'
