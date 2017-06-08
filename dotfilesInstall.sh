@@ -65,7 +65,7 @@ elif [ $(uname) = 'Linux' ]; then
   git config --global diff.tool 'vimdiff'
 fi
 
-if [ ! -e ~/.vim/bundle/repos/github.com/Shougo/dein.vim ]; then
+if [ -x "$(which git)" ] && [ ! -e ~/.vim/bundle/repos/github.com/Shougo/dein.vim ]; then
   curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > /tmp/dein_installer.sh
   sh /tmp/dein_installer.sh ~/.vim/bundle
   rm -f /tmp/dein_installer.sh
