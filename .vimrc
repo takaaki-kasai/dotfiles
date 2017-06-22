@@ -100,9 +100,11 @@ set backspace=indent,eol,start    " バックスペースでオートインデ�
 let &t_SI.="\e[6 q"
 let &t_EI.="\e[2 q"
 " カーソル形状がすぐに元に戻らないのでタイムアウト時間を調整
-set ttimeoutlen=10
-" 挿入モードを抜けた時にカーソルが見えなくなる現象対策(なぜかこれで治る)
+" set ttimeoutlen=10
+" 挿入モードを抜けた時にカーソル形状をすぐに元に戻す
 inoremap <ESC> <ESC>
+" Bracketed Paste の無効化(挙動が気に入らないので)
+set t_BE=
 
 " 自動インデントさせずに貼り付けるための挿入モード
 nnoremap <Space>i :<C-u>set paste<Return>i
