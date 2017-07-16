@@ -47,7 +47,7 @@ ln -sf ~/dotfiles/.screenrc ~/.screenrc
 ln -sf ~/dotfiles/.tigrc ~/.tigrc
 ln -sf ~/dotfiles/.tigrc.vim ~/.tigrc.vim
 ln -sf ~/dotfiles/.lesskey ~/.lesskey
-lesskey
+[ -x "$(which lesskey)" ] && lesskey
 mkdir -p ~/bin
 ln -sf ~/dotfiles/bin/git-diff-normal-format ~/bin/git-diff-normal-format
 ln -sf ~/dotfiles/bin/git-foresta ~/bin/git-foresta
