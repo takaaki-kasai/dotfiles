@@ -52,6 +52,7 @@ mkdir -p ~/bin
 ln -sf ~/dotfiles/bin/git-diff-normal-format ~/bin/git-diff-normal-format
 ln -sf ~/dotfiles/bin/git-foresta ~/bin/git-foresta
 ln -sf ~/dotfiles/bin/rubocop ~/bin/rubocop
+ln -sf ~/dotfiles/bin/noah-firm-up ~/bin/noah-firm-up
 
 if [ $(uname) = 'Darwin' ]; then
   # Mac用のコード

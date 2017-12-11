@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+require 'open3'
+require 'optparse'
+
+host = nil
+user = 'root'
+opt = OptionParser.new
+opt.on('-h host', 'Hostname or IP of host to firmupdate') { |h| host = h }
+opt.on('-u user', 'Username of usr to login host (default: root)') { |u| user = u }
+opt.parse!(ARGV)
+
+fail 'Please specify the host (-h host)' unless host
+
+toplevel_dir = Open3.capture3('git rev-parse --show-toplevel')[0].chomp
+firmwares = Dir.glob("#{toplevel_dir}/build/rel/*.bin")
+fail 'Multiple firmwares found' if firmwares.size > 1
+fail 'No firmwares found' if firmwares.size.zero?
+
+target_firm_path = firmwares.first
+require_relative "#{toplevel_dir}/prod_conf"
+byname = Noah::ProdConf::BYNAME
+
+command = "tar cf - -C #{File.dirname(target_firm_path)} #{File.basename(target_firm_path)}"
+command << " | ssh #{user}@#{host} '"
+command << "if [[ $(/etc/init.d/appvars byname) == \"#{byname}\" ]];"
+command << "then tar xvf - -C /tmp; /sbin/firmupdate /tmp/#{File.basename(target_firm_path)};"
+command << "else echo \"BYNAME not match (local: #{byname}, remote: $(/etc/init.d/appvars byname))\";"
+command << "fi'"
+
+exec command
