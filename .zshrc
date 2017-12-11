@@ -169,7 +169,7 @@ fi
 source ~/.zsh/git-prompt.sh
 setopt TRANSIENT_RPROMPT
 precmd () {
-    RPROMPT=$(echo $(__git_ps1 "[%s]")|sed -e s/%/%%/|sed -e s/%%%/%%/|sed -e 's/\\$/\\\\$/')
+    RPROMPT=$(echo $(__git_ps1 "[%s]")|sed -e s/%/%%/|sed -e s/%%%/%%/|sed -e 's/\$/\\$/')
 }
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWSTASHSTATE=1
