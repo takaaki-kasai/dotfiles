@@ -373,6 +373,7 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('vim-scripts/AnsiEsc.vim')
   call dein#add('itchyny/vim-parenmatch')
   call dein#add('itchyny/vim-cursorword')
+  call dein#add('terryma/vim-multiple-cursors')
 
   " Required:
   call dein#end()
@@ -638,3 +639,18 @@ let g:markdown_enable_spell_checking = 0
 
 " vim-parenmatch -----------------------------------------------------------------
 let g:loaded_matchparen = 1
+
+" vim-multiple-cursors -----------------------------------------------------------------
+" Called once right before you start selecting multiple cursors
+function! Multiple_cursors_before()
+  if exists(':NeoCompleteLock')==2
+    exe 'NeoCompleteLock'
+  endif
+endfunction
+
+" Called once only when the multiple selection is canceled (default <Esc>)
+function! Multiple_cursors_after()
+  if exists(':NeoCompleteUnlock')==2
+    exe 'NeoCompleteUnlock'
+  endif
+endfunction
