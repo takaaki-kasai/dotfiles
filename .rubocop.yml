@@ -86,7 +86,7 @@ SignalException:
   EnforcedStyle: semantic
 
 # クラス指定のないrescue節を禁止しない
-RescueWithoutErrorClass:
+RescueStandardError:
   Enabled: false
 
 # if 文や case 文全体の返り値を代入するスタイルを強制しない
@@ -98,6 +98,10 @@ CollectionMethods:
   Enabled: true
   PreferredMethods:
     inject: 'inject'
+
+# sprintf フォーマットの引数指定形式をチェックしない
+FormatStringToken:
+  Enabled: false
 
 AllCops:
   TargetRubyVersion: 2.1
