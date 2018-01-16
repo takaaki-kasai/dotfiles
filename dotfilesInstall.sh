@@ -15,7 +15,7 @@ git config --global init.templatedir '~/.git_templates'
 git config --global user.name "$git_user_name"
 git config --global user.email "$git_user_email"
 git config --global diff.algorithm 'histogram'
-git config --global diff.indentHeuristic true
+# git config --global diff.indentHeuristic true
 # git config --global core.abbrev 8
 git config --global core.whitespace trailing-space,tab-in-indent
 git config --global push.default nothing
