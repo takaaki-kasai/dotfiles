@@ -59,7 +59,10 @@ if [ $(uname) = 'Darwin' ]; then
   git config --global core.editor 'env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim'
   git config --global diff.tool 'macvim'
   git config --global difftool.macvim.cmd 'env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -d $LOCAL $REMOTE'
-  ln -sf ~/dotfiles/.karabiner/private.xml ~/Library/Application\ Support/Karabiner/private.xml
+  mkdir -p ~/.config/karabiner/assets/complex_modifications
+  for rule in $(ls ~/dotfiles/.config/karabiner/assets/complex_modifications); do
+    cp ~/dotfiles/.config/karabiner/assets/complex_modifications/$rule ~/.config/karabiner/assets/complex_modifications/$rule
+  done
   ln -snf ~/dotfiles/.hammerspoon ~/.hammerspoon
 elif [ $(uname) = 'Linux' ]; then
   # Linux用のコード
