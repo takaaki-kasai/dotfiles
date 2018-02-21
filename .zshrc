@@ -4,6 +4,7 @@
 # functions, options, key bindings, etc.
 #
 
+typeset -U path PATH fpath # 重複を避けたい変数
 
 ### ヒストリ関連 ###################################################
 setopt APPEND_HISTORY # ヒストリを使用する
