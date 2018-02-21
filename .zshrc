@@ -151,30 +151,60 @@ setopt NO_BEEP
 
 
 ### プロンプト関連 ############################################################
-# PS1=$'%{\e]2;[%n@%m:%~]\a'$'\e]1;@%m%#:%~\a%}'$'[%n@%m%{\e[00m%}]%~%# '
-if [ "$PS1" ]; then
-    case $TERM in
-        xterm*)
-            #PS1=$'%{\e]2;[%n@%m:%~]\a'$'\e]1;@%m%#:%~\a%}'$'[%n@%m%{\e[00m%}]%(5~,%-1~/.../%1~,%~)%# '
-            PS1=$'%{\e]0;[%n@%m:%~]\a%}'$'[%n@%m%{\e[00m%}]%(5~,%-1~/.../%1~,%~)%# '
-            ;;
-        *)
-            PS1=$'[%n@%m%{\e[00m%}]%(5~,%-2~/.../%2~,%~)%# '
-            ;;
-    esac
-fi
+source ~/.zsh/git-prompt.sh
+# setopt TRANSIENT_RPROMPT
+unset RPROMPT
+
+case $TERM in
+    xterm*)
+        BASE_PROMPT=$'%{\e]0;[%n@%m:%~]\a%}'$'[%n@%m%{\e[00m%}]%(5~,%-1~/.../%1~,%~)%# '
+        ;;
+    *)
+        BASE_PROMPT=$'[%n@%m%{\e[00m%}]%(5~,%-2~/.../%2~,%~)%# '
+        ;;
+esac
+
+# Enter を打った時に実行する関数
+function my_accept_line() {
+    # プロンプトにgit状態も表示されている場合、git状態の表示を消す
+    if [[ ${#PROMPT} -ne ${#BASE_PROMPT} ]]; then
+        # 先に消すとちらつくので、表示したい内容で上書きしてから余計な部分を消す
+        print -n $'\e[F' # 前の行の先頭に移動
+        print -Pn "$BASE_PROMPT" # BASE_PROMPTを表示
+        print -Rn "$BUFFER" # 入力内容を再表示
+        print -n $'\e[K\e[s\e[E\e[2K\e[u' # カーソルより後ろを消し、カーソル位置保存、次の行に移動して行全体を消し、保存したカーソル位置に戻る
+    fi
+    zle accept-line
+}
+zle -N my_accept_line
+bindkey '^M' my_accept_line
 
 # プロンプト表示前に実行される関数
 # (これを使用しなくてもpreexec()で変更したプロンプトは元に戻る)
-source ~/.zsh/git-prompt.sh
-setopt TRANSIENT_RPROMPT
 precmd () {
-    RPROMPT=$(echo $(__git_ps1 "[%s]")|sed -e s/%/%%/|sed -e s/%%%/%%/|sed -e 's/\$/\\$/')
+    # RPROMPT=$(echo $(__git_ps1 "[%s]")|sed -e s/%/%%/|sed -e s/%%%/%%/|sed -e 's/\$/\\$/')
+    local git_prompt="$(__git_ps1 '%s')"
+    if [[ -n "$git_prompt" ]]; then
+        # local color=36 # cyan
+        local color=34 # blue
+        if [[ $git_prompt == *'*'* ]]; then
+            color=31 # red
+        elif [[ $git_prompt == *'%'* ]]; then
+            color=33 # yellow
+        elif [[ $git_prompt == *'+'* ]]; then
+            color=32 # green
+        elif [[ $git_prompt == *'$'* ]]; then
+            color=35 # magenta
+        fi
+        PROMPT=$'\e['"$color"$'m(\ue0a0 '"$git_prompt"$')\e[0m\n'"$BASE_PROMPT"
+    else
+        PROMPT="$BASE_PROMPT"
+    fi
 }
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWSTASHSTATE=1
 GIT_PS1_SHOWUNTRACKEDFILES=1
-GIT_PS1_SHOWUPSTREAM="auto"
+GIT_PS1_SHOWUPSTREAM=""
 GIT_PS1_DESCRIBE_STYLE="branch"
 GIT_PS1_SHOWCOLORHINTS=0
 
