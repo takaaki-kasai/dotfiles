@@ -46,6 +46,7 @@ ln -sf ~/dotfiles/.colordiffrc ~/.colordiffrc
 ln -sf ~/dotfiles/.screenrc ~/.screenrc
 ln -sf ~/dotfiles/.tigrc ~/.tigrc
 ln -sf ~/dotfiles/.tigrc.vim ~/.tigrc.vim
+ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf
 ln -sf ~/dotfiles/.lesskey ~/.lesskey
 [ -x "$(which lesskey)" ] && lesskey
 mkdir -p ~/bin

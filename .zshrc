@@ -269,3 +269,64 @@ fi
 
 # for nodebrew
 export PATH=$HOME/.nodebrew/current/bin:$PATH
+
+# for peco
+PECO="$(which peco)"
+
+# for tmux (.zshrc 全体の末尾に配置すること)
+function starttmux() {
+    if [[ -x "$(which tmux)" && -x "$PECO" ]]; then
+        if [[ -z "$TMUX" && $- == *'l'* ]]; then
+            # get the TMUX_IDs
+            tmux_sessions="$(tmux list-sessions 2>/dev/null)"
+            tmux_create_new_session='Create New Session'
+            tmux_skip_tmux='Skip tmux'
+            tmux_choices="$tmux_create_new_session\n$tmux_skip_tmux"
+            if [[ -n $tmux_sessions ]]; then
+                tmux_choices="$tmux_sessions\n$tmux_choices"
+            fi
+            TMUX_ID="$(echo $tmux_choices | $PECO | cut -d: -f1)"
+            if [[ "$TMUX_ID" == "$tmux_create_new_session" ]]; then
+                echo -n 'New session name: '
+                read tmux_new_session_name
+                exec tmux new-session -s "$tmux_new_session_name"
+            elif [[ "$TMUX_ID" == "$tmux_skip_tmux" ]]; then
+                :  # Start terminal normally
+            elif [[ -n "$TMUX_ID" ]]; then
+                {
+                    sleep 0.01; tmux kill-session -C -t "$TMUX_ID" # アタッチ直後に全ウィンドウの通知をクリア
+                    sleep 0.05; tmux kill-session -C -t "$TMUX_ID" # 少し遅れて通知してくるアプリケーション対策として再度クリア
+                    sleep 0.1; tmux kill-session -C -t "$TMUX_ID"  # 念のためもう1度クリア
+                } &
+                exec tmux attach-session -t "$TMUX_ID"
+            else
+                :  # Start terminal normally
+            fi
+        fi
+    else
+        echo '============================'
+        echo 'Please install tmux and peco'
+        echo '============================'
+    fi
+}
+function ssh() {
+    if [[ -n "$TMUX" ]]; then
+        local window_name="$(tmux display -p '#{window_name}')"
+        tmux rename-window "$(echo "$*" | sed -re 's/^.*(@[^[:space:]]+).*$/\1/')"
+        trap "tmux rename-window $window_name; tmux set-window-option automatic-rename "on" 1>/dev/null" INT EXIT ZERR
+    fi
+    command ssh $@
+}
+function exit() {
+    if [[ -z "$TMUX" ]]; then
+        builtin exit
+    else
+        tmux detach
+    fi
+}
+function exit!() {
+    builtin exit
+}
+if [[ $OSTYPE == 'linux'* ]]; then
+    starttmux
+fi
