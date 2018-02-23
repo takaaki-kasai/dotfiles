@@ -49,6 +49,8 @@ ln -sf ~/dotfiles/.tigrc.vim ~/.tigrc.vim
 ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf
 ln -sf ~/dotfiles/.lesskey ~/.lesskey
 [ -x "$(which lesskey)" ] && lesskey
+mkdir -p ~/.config
+ln -snf ~/dotfiles/.config/peco ~/.config/peco
 mkdir -p ~/bin
 ln -sf ~/dotfiles/bin/git-diff-normal-format ~/bin/git-diff-normal-format
 ln -sf ~/dotfiles/bin/git-foresta ~/bin/git-foresta
