@@ -288,52 +288,6 @@ let g:PHP_vintage_case_default_indent = 1
 " メソッド呼び出しの -> の最初のハイフンが単語と認識されないようにハイフンは除外
 autocmd FileType php setlocal iskeyword-=-
 
-" NeoBundle -----------------------------------------------------------------
-" set nocompatible               " be iMproved
-" filetype off                   " required!
-
-" if has('vim_starting')
-"   set runtimepath+=~/.vim/bundle/neobundle.vim/
-" endif
-
-" call neobundle#begin(expand('~/.vim/bundle/'))
-
-" NeoBundleFetch 'Shougo/neobundle.vim' " Let NeoBundle manage NeoBundle
-
-" NeoBundle 'matchit.zip'
-" NeoBundle 'Shougo/neocomplete.vim'
-" NeoBundle 'Shougo/unite.vim'
-" NeoBundle 'Shougo/vimfiler.vim'
-" NeoBundle 'Shougo/vimproc.vim', {
-"       \   'build': {
-"       \     'mac': 'make -f make_mac.mak',
-"       \     'linux': 'make',
-"       \   },
-"       \ }
-" NeoBundle 'altercation/vim-colors-solarized'
-" NeoBundle 'itchyny/lightline.vim'
-" NeoBundle 'othree/eregex.vim'
-" NeoBundle 'othree/html5.vim'
-" NeoBundle 'kchmck/vim-coffee-script'
-" NeoBundle 'tpope/vim-fugitive'
-" NeoBundle 'scrooloose/syntastic'
-" NeoBundle 'tyru/caw.vim.git'
-" NeoBundle 'vim-scripts/diffchar.vim'
-" NeoBundle 'vim-scripts/DirDiff.vim'
-" NeoBundle 'rking/ag.vim'
-" NeoBundle 'cohama/agit.vim'
-" NeoBundle 'thinca/vim-qfreplace'
-" NeoBundle 'gabrielelana/vim-markdown'
-" NeoBundle 'vim-scripts/AnsiEsc.vim'
-" NeoBundle 'itchyny/vim-parenmatch'
-" NeoBundle 'itchyny/vim-cursorword'
-
-" call neobundle#end()
-
-" filetype plugin indent on     " required!
-" NeoBundleCheck
-" End of NeoBundle -----------------------------------------------------------------
-
 " dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
