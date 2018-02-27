@@ -215,6 +215,8 @@ if &diff
   " augroup END
   " ホワイトスペースを無視するかどうか切り替える
   noremap <silent> <Leader>w :call MyToggleDiffIgnoreWhiteSpace()<CR>
+  " itchyny/vim-cursorword プラグインを無効化
+  let g:cursorword = 0
 endif
 
 " QuickFix の各ファイルに対して何かを実行するコマンド
