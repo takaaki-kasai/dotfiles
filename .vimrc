@@ -515,7 +515,7 @@ let g:syntastic_mode_map = { 'mode': 'active',
       \ 'passive_filetypes': ['rst'] }
 let g:syntastic_ruby_checkers = ['rubocop']
 let g:syntastic_eruby_ruby_quiet_messages = {
-      \ 'regex': '\m^possibly useless use of a \(constant\|variable\) in void context' }
+      \ 'regex': '\m^possibly useless use of .* in void context' }
 
 " caw.vim -----------------------------------------------------------------
 nmap <Leader>c <Plug>(caw:hatpos:toggle)
