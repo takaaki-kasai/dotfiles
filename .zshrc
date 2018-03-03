@@ -329,7 +329,7 @@ function starttmux() {
                     sleep 0.05; tmux kill-session -C -t "$TMUX_ID" # 少し遅れて通知してくるアプリケーション対策として再度クリア
                     sleep 0.1; tmux kill-session -C -t "$TMUX_ID"  # 念のためもう1度クリア
                 } &
-                exec tmux attach-session -t "$TMUX_ID"
+                exec tmux attach-session -d -t "$TMUX_ID"
             else
                 :  # Start terminal normally
             fi
