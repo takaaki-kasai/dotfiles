@@ -525,6 +525,7 @@ let g:caw_hatpos_skip_blank_line = 1
 " diffchar.vim -----------------------------------------------------------------
 let g:DiffUnit = 'Word1'
 " let g:DiffUpdate = 1  " Ver5.5からデフォルトで有効になった
+let g:DiffPairVisible = 0
 
 " ag.vim -----------------------------------------------------------------
 command! -nargs=+ -complete=file MyGrep call MyGrep(<f-args>)
