@@ -75,7 +75,7 @@ bind main rs !@?git reset --soft %(commit)
 bind main rh !@?git reset --hard %(commit)
 bind main yy !@git stash
 bind main yp !@git stash pop
-bind main sh :!git show %(ref)
+bind main sh :!git show %(commit)
 bind main st :!git status
 bind main L !git l
 bind main fo !sh -c "git-foresta --all --style=10 | less"
