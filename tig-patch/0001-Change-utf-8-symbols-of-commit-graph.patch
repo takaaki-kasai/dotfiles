@@ -1,17 +1,17 @@
-From 9655cc2429a94bac062e76678f6a5d421d619455 Mon Sep 17 00:00:00 2001
+From a066c26a583bc23a10d6889503d9dd648bdaa882 Mon Sep 17 00:00:00 2001
 From: Takaaki Kasai <high.river@gmai.com>
-Date: Thu, 17 Mar 2016 22:00:21 +0900
-Subject: [PATCH 1/2] Change utf-8 symbols of commit graph
+Date: Fri, 13 Jul 2018 18:34:35 +0900
+Subject: [PATCH] Change utf-8 symbols of commit graph
 
 ---
- src/graph-v2.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ src/graph-v2.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/src/graph-v2.c b/src/graph-v2.c
-index 4606105..af73e20 100644
+index 98f476e..18dc2dd 100644
 --- a/src/graph-v2.c
 +++ b/src/graph-v2.c
-@@ -929,11 +929,11 @@ graph_symbol_to_utf8(const struct graph_symbol *symbol)
+@@ -1036,12 +1036,12 @@ graph_symbol_to_utf8(const struct graph_symbol *symbol)
  {
  	if (symbol->commit) {
  		if (symbol->boundary)
@@ -22,10 +22,12 @@ index 4606105..af73e20 100644
 +			return " ■";
  		else if (symbol->merge)
 -			return " ●";
+-		return " ∙";
 +			return " ◎";
- 		return " ●";
++		return " ●";
  	}
  
+ 	if (graph_symbol_cross_merge(symbol))
 -- 
-2.9.0
+2.15.1
 
