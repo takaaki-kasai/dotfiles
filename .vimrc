@@ -176,34 +176,49 @@ nnoremap <C-W><Space> <C-W>=
 " ビープ音すべてを無効にする
 set visualbell t_vb=
 
-" diffの時にホワイトスペースを無視するかどうか
-" diffchar.vim 利用時 diffopt の iwhite がオンだと単語単位の差分表示がずれるので独自定義
-let g:my_diff_ignore_whitespace = 0
-
 " diffのコマンド
-set diffexpr=MyDiff()
-function! MyDiff()
-  let l:opt = ''
-  if g:my_diff_ignore_whitespace
-    let l:opt = l:opt . '-w '
-  endif
-  silent execute '!git-diff-normal-format ' . l:opt . v:fname_in . ' ' . v:fname_new . ' > ' . v:fname_out
-  redraw!
-endfunction
+if has("patch-8.1.0360")
+  " diffには内部組み込み実装を使い、アルゴリズムを指定
+  set diffopt=internal,filler,algorithm:histogram,indent-heuristic
+else
+  let g:my_diff_ignore_whitespace = 0
+  set diffexpr=MyDiff()
+  function! MyDiff()
+    let l:opt = ''
+    if g:my_diff_ignore_whitespace
+      let l:opt = l:opt . '-w '
+    endif
+    silent execute '!git-diff-normal-format ' . l:opt . v:fname_in . ' ' . v:fname_new . ' > ' . v:fname_out
+    redraw!
+  endfunction
+endif
 
 " diffの時にホワイトスペースを無視するかどうか切り替える関数
 function! MyToggleDiffIgnoreWhiteSpace()
-  if g:my_diff_ignore_whitespace
-    let g:my_diff_ignore_whitespace = 0
-    let l:msg = 'Not Ignore Whitespace'
+  let l:ignore_msg = 'Ignore Whitespace'
+  let l:not_ignore_msg = 'Not Ignore Whitespace'
+
+  if has("patch-8.1.0360")
+    if &diffopt =~ 'iwhite'
+      set diffopt-=iwhite
+      let l:msg = l:not_ignore_msg
+    else
+      set diffopt+=iwhite
+      let l:msg = l:ignore_msg
+    endif
   else
-    let g:my_diff_ignore_whitespace = 1
-    let l:msg = 'Ignore Whitespace'
+    if g:my_diff_ignore_whitespace
+      let g:my_diff_ignore_whitespace = 0
+      let l:msg = l:not_ignore_msg
+    else
+      let g:my_diff_ignore_whitespace = 1
+      let l:msg = l:ignore_msg
+    endif
   endif
 
   diffupdate
   call feedkeys("\<Plug>ToggleDiffCharAllLines\<Plug>ToggleDiffCharAllLines")  " 画面表示更新のため2回
-  call feedkeys(":echo '" . l:msg . "'\<CR>")
+  echo l:msg
 endfunction
 
 " vimdiffで起動した際の設定
@@ -526,6 +541,9 @@ let g:caw_hatpos_skip_blank_line = 1
 let g:DiffUnit = 'Word1'
 " let g:DiffUpdate = 1  " Ver5.5からデフォルトで有効になった
 let g:DiffPairVisible = 0
+if has("patch-8.1.0360")
+  let g:DiffExpr = 0 " vim組み込みのdiffを使う(diffexprにプラグイン付属のコマンドをセットしない)
+endif
 
 " ag.vim -----------------------------------------------------------------
 command! -nargs=+ -complete=file MyGrep call MyGrep(<f-args>)
