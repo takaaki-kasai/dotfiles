@@ -11,4 +11,4 @@ highlight SpecialKey gui=none guifg=#657b83 guibg=NONE
 highlight Nontext gui=none guifg=#657b83 guibg=NONE
 " ZenkakuSpace の定義は .vimrc 参照
 highlight ZenkakuSpace gui=underline guifg=#93a1a1 guibg=NONE
-set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h14
+set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h16
