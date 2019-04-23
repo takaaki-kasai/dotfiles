@@ -25,8 +25,14 @@ function keyPressFunction(key, mods, callback)
   mods = mods or {}
   callback = callback or function() end
   return function()
-    hs.eventtap.event.newKeyEvent(mods, string.lower(key), true):post()
-    hs.eventtap.event.newKeyEvent(mods, string.lower(key), false):post()
+    for _, mod in pairs(mods) do
+      hs.eventtap.event.newKeyEvent(mod, true):post()
+    end
+    hs.eventtap.event.newKeyEvent(string.lower(key), true):post()
+    hs.eventtap.event.newKeyEvent(string.lower(key), false):post()
+    for i = #mods, 1, -1 do
+      hs.eventtap.event.newKeyEvent(mods[i], false):post()
+    end
     callback()
   end
 end
