@@ -65,8 +65,12 @@ PerceivedComplexity:
 #   Exclude:
 #     - path/to/file
 
-# ハッシュや配列を複数行で記述する場合、末尾の要素の行末にカンマを付ける
-TrailingCommaInLiteral:
+# 配列を複数行で記述する場合、末尾の要素の行末にカンマを付ける
+TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+# ハッシュを複数行で記述する場合、末尾の要素の行末にカンマを付ける
+TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: consistent_comma
 
 # メソッドの引数を複数行で記述する場合、末尾の要素の行末にカンマを付ける
@@ -74,11 +78,11 @@ TrailingCommaInArguments:
   EnforcedStyleForMultiline: consistent_comma
 
 # 配列の閉じ括弧のインデントは、開始括弧のある行の先頭に揃える
-IndentArray:
+IndentFirstArrayElement:
   EnforcedStyle: consistent
 
 # ハッシュの閉じ括弧のインデントは、開始括弧のある行の先頭に揃える
-IndentHash:
+IndentFirstHashElement:
   EnforcedStyle: consistent
 
 # 例外の送出時に raise を利用するか fail を利用するかは文脈に合わせる
@@ -104,6 +108,6 @@ FormatStringToken:
   Enabled: false
 
 AllCops:
-  TargetRubyVersion: 2.1
-  # Exclude:
-  #   - path/to/exclude/**/*
+  TargetRubyVersion: 2.3
+  Exclude:
+    - bin/git-diff-normal-format
