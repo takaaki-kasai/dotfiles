@@ -1,10 +1,11 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 def to_human_bytes(bytes_string)
   `numfmt --to=iec-i --suffix=B --format='%3f' #{bytes_string}`.chomp
 end
 
-cmd_pane_detail_history_bytes = "tmux list-panes -aF '\#{session_name}\t\#{window_index}: \#{window_name}\t\#{history_bytes}'" # rubocop: disable Lint/InterpolationCheck
+cmd_pane_detail_history_bytes = "tmux list-panes -aF '\#{session_name}\t\#{window_index}: \#{window_name}\t\#{history_bytes}'"
 
 detail_history_bytes = {}
 `#{cmd_pane_detail_history_bytes}`.split("\n").map { |h| h.split("\t") }.each do |session_name, window_name, history_bytes|
@@ -15,7 +16,7 @@ total_all_bytes = 0
 result = []
 detail_history_bytes.each do |session_name, session_history_bytes|
   total_session_bytes = 0
-  session_result = ''
+  session_result = +''
   session_history_bytes.each do |window_name, history_bytes|
     session_result << "  Window #{window_name}: #{to_human_bytes(history_bytes)}" << "\n"
     total_session_bytes += history_bytes

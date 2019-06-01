@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 require 'open3'
 require 'optparse'
@@ -21,7 +22,7 @@ target_firm_path = firmwares.first
 require_relative "#{toplevel_dir}/prod_conf"
 byname = Noah::ProdConf::BYNAME
 
-command = "tar cf - -C #{File.dirname(target_firm_path)} #{File.basename(target_firm_path)}"
+command = +"tar cf - -C #{File.dirname(target_firm_path)} #{File.basename(target_firm_path)}"
 command << " | ssh #{user}@#{host} '"
 command << "if [[ $(/etc/init.d/appvars byname) == \"#{byname}\" ]];"
 command << "then tar xvf - -C /tmp; /sbin/firmupdate /tmp/#{File.basename(target_firm_path)};"
