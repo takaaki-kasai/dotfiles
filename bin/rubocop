@@ -1,6 +1,10 @@
 #!/bin/bash
-if [ $# -eq 1 ] && [ $1 = '--version' ]; then
+if [[ $# -eq 1 ]] && [[ $1 = '--version' ]]; then
   /usr/local/bin/rubocop --version 2> /dev/null
 else
   /usr/local/bin/rubocop $@
+  result=$?
+  if [[ $result -gt 1 ]]; then
+    echo "$3:1:1: F: Rubocop abnormally exited with status code $result"
+  fi
 fi
