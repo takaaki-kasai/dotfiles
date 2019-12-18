@@ -375,7 +375,18 @@ highlight SpecialKey cterm=none ctermfg=10 ctermbg=none
 " 改行などの色
 highlight NonText cterm=none ctermfg=10
 " 検索ヒット部分の色
-highlight Search cterm=none ctermfg=0 ctermbg=3
+function! MyHighlightSearch()
+  if &diff
+    highlight Search cterm=none ctermfg=15 ctermbg=2
+  else
+    highlight Search cterm=none ctermfg=0 ctermbg=3
+  endif
+endfunction
+augroup my_highlight_search
+  autocmd!
+  autocmd OptionSet diff call MyHighlightSearch()
+augroup END
+call MyHighlightSearch()
 " ビジュアルモードの色
 highlight Visual cterm=reverse ctermfg=none ctermbg=none
 " vimdiffの色設定
