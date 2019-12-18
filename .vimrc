@@ -194,14 +194,19 @@ else
 endif
 
 " diffの時にホワイトスペースを無視するかどうか切り替える関数
-function! MyToggleDiffIgnoreWhiteSpace()
-  let l:ignore_msg = 'Ignore Whitespace'
+function! MyToggleDiffIgnoreWhiteSpace(ignore_all_flag)
+  let l:ignore_msg = 'Ignore Whitespace Changes'
+  let l:ignore_all_msg = 'Ignore All Whitespace'
   let l:not_ignore_msg = 'Not Ignore Whitespace'
 
   if has("patch-8.1.0360")
-    if &diffopt =~ 'iwhite'
+    if &diffopt =~ 'iwhite' || &diffopt =~ 'iwhiteall'
       set diffopt-=iwhite
+      set diffopt-=iwhiteall
       let l:msg = l:not_ignore_msg
+    elseif a:ignore_all_flag
+      set diffopt+=iwhiteall
+      let l:msg = l:ignore_all_msg
     else
       set diffopt+=iwhite
       let l:msg = l:ignore_msg
@@ -229,7 +234,8 @@ if &diff
   "   autocmd VimEnter * execute '%SDChar'
   " augroup END
   " ホワイトスペースを無視するかどうか切り替える
-  noremap <silent> <Leader>w :call MyToggleDiffIgnoreWhiteSpace()<CR>
+  noremap <silent> <Leader>w :call MyToggleDiffIgnoreWhiteSpace(0)<CR>
+  noremap <silent> <Leader>e :call MyToggleDiffIgnoreWhiteSpace(1)<CR>
   " itchyny/vim-cursorword プラグインを無効化
   let g:cursorword = 0
 endif
