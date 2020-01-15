@@ -272,9 +272,27 @@ function gifa() { git-foresta --all --style=10 "$@" | less }
 compdef _git gifo=git-log
 compdef _git gifa=git-log
 
-function agg() { ag "$@" $(git ls-files) }
-function agl() { ag -l "$@" $(git ls-files) }
-function agv() { vim -p $(ag -l "$@" $(git ls-files)) }
+function agg() {
+    if [[ $# -gt 1 && ${@:($#)} == "./"* ]]; then
+        ag "${@:1:($# - 1)}" $(git ls-files ${@:($#)})
+    else
+        ag "$@" $(git ls-files)
+    fi
+}
+function agl() {
+    if [[ $# -gt 1 && ${@:($#)} == "./"* ]]; then
+        ag -l "${@:1:($# - 1)}" $(git ls-files ${@:($#)})
+    else
+        ag -l "$@" $(git ls-files)
+    fi
+}
+function agv() {
+    if [[ $# -gt 1 && ${@:($#)} == "./"* ]]; then
+        vim -p $(ag -l "${@:1:($# - 1)}" $(git ls-files ${@:($#)}))
+    else
+        vim -p $(ag -l "$@" $(git ls-files))
+    fi
+}
 
 ### 環境変数 ############################################################
 #export JAVA_HOME=/usr/java/latest
