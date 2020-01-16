@@ -337,20 +337,20 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('itchyny/lightline.vim')
   call dein#add('othree/eregex.vim')
   call dein#add('othree/html5.vim')
-  call dein#add('kchmck/vim-coffee-script')
+  " call dein#add('kchmck/vim-coffee-script')
   call dein#add('tpope/vim-fugitive')
   call dein#add('scrooloose/syntastic')
   call dein#add('tyru/caw.vim.git')
   call dein#add('rickhowe/diffchar.vim')
   call dein#add('vim-scripts/DirDiff.vim')
-  call dein#add('rking/ag.vim')
-  call dein#add('cohama/agit.vim')
-  call dein#add('thinca/vim-qfreplace')
+  " call dein#add('rking/ag.vim')
+  " call dein#add('cohama/agit.vim')
+  " call dein#add('thinca/vim-qfreplace')
   call dein#add('gabrielelana/vim-markdown')
   call dein#add('vim-scripts/AnsiEsc.vim')
   call dein#add('itchyny/vim-parenmatch')
   call dein#add('itchyny/vim-cursorword')
-  call dein#add('terryma/vim-multiple-cursors')
+  " call dein#add('terryma/vim-multiple-cursors')
 
   " Required:
   call dein#end()
@@ -563,68 +563,68 @@ if has("patch-8.1.0360")
 endif
 
 " ag.vim -----------------------------------------------------------------
-command! -nargs=+ -complete=file MyGrep call MyGrep(<f-args>)
-nnoremap <Leader>g :MyGrep<Space>
-vnoremap <Leader>g y:MyGrep<Space><C-R>"
+" command! -nargs=+ -complete=file MyGrep call MyGrep(<f-args>)
+" nnoremap <Leader>g :MyGrep<Space>
+" vnoremap <Leader>g y:MyGrep<Space><C-R>"
 
-function! MyGrep(...)
-  let l:folder = len(a:000) == 2 ? ' ' . a:2 : ''
-  let l:grep_pattern_vim = E2v(a:1)
-  execute 'tabedit'
-  if executable('ag')
-    execute "Ag! '" . a:1 . "'" . l:folder
-  else
-    execute "vimgrep /" . l:grep_pattern_vim . "/j " . (l:folder == '' ? '.' : l:folder) . '/** | cwindow'
-  endif
-  if len(getqflist()) == 0
-    return
-  endif
-  execute "nnoremap <silent> <buffer> p :call MyQfCurrentLineFilePreview('" . l:grep_pattern_vim . "')<CR>"
-  execute 'nnoremap <buffer> s :QFDo %S/' . l:grep_pattern_vim . '/'
-  execute 'vnoremap <buffer> s y:QFDo %S/<C-R>"/'
-  execute 'only'
-  execute 'setlocal previewheight=' . winheight(0) / 2
-  setlocal nowinfixheight
-  nnoremap <buffer> h h
-  nnoremap <buffer> v v
-  nnoremap <buffer> e :QFDo<Space>
-  nnoremap <silent> <buffer> q :tabclose<CR>
-  nnoremap <silent> <buffer> <Plug>(my:set-hlsearch) :set hlsearch<CR>
-  " updatetimeはカーソル移動時に自動読み込みが連続しないような長さに調整する
-  execute "autocmd CursorMoved <buffer> if MyDetectCursorChangeLine() | set updatetime=100 | end"
-  autocmd CursorHold <buffer> call feedkeys("p\<Plug>(my:set-hlsearch)") | set updatetime=4000
-  " カーソル位置を記録するために初期化
-  call MyDetectCursorChangeLine()
-  " 検索完了後に最初のファイルを表示
-  call feedkeys('p')
-  call feedkeys("\<Plug>(my:set-hlsearch)")
-endfunction
+" function! MyGrep(...)
+"   let l:folder = len(a:000) == 2 ? ' ' . a:2 : ''
+"   let l:grep_pattern_vim = E2v(a:1)
+"   execute 'tabedit'
+"   if executable('ag')
+"     execute "Ag! '" . a:1 . "'" . l:folder
+"   else
+"     execute "vimgrep /" . l:grep_pattern_vim . "/j " . (l:folder == '' ? '.' : l:folder) . '/** | cwindow'
+"   endif
+"   if len(getqflist()) == 0
+"     return
+"   endif
+"   execute "nnoremap <silent> <buffer> p :call MyQfCurrentLineFilePreview('" . l:grep_pattern_vim . "')<CR>"
+"   execute 'nnoremap <buffer> s :QFDo %S/' . l:grep_pattern_vim . '/'
+"   execute 'vnoremap <buffer> s y:QFDo %S/<C-R>"/'
+"   execute 'only'
+"   execute 'setlocal previewheight=' . winheight(0) / 2
+"   setlocal nowinfixheight
+"   nnoremap <buffer> h h
+"   nnoremap <buffer> v v
+"   nnoremap <buffer> e :QFDo<Space>
+"   nnoremap <silent> <buffer> q :tabclose<CR>
+"   nnoremap <silent> <buffer> <Plug>(my:set-hlsearch) :set hlsearch<CR>
+"   " updatetimeはカーソル移動時に自動読み込みが連続しないような長さに調整する
+"   execute "autocmd CursorMoved <buffer> if MyDetectCursorChangeLine() | set updatetime=100 | end"
+"   autocmd CursorHold <buffer> call feedkeys("p\<Plug>(my:set-hlsearch)") | set updatetime=4000
+"   " カーソル位置を記録するために初期化
+"   call MyDetectCursorChangeLine()
+"   " 検索完了後に最初のファイルを表示
+"   call feedkeys('p')
+"   call feedkeys("\<Plug>(my:set-hlsearch)")
+" endfunction
 
-function! MyDetectCursorChangeLine()
-  if !exists('b:current_line')
-    let b:current_line = line('.')
-  endif
-  let l:return_val = b:current_line != line('.')
-  let b:current_line = line('.')
-  return l:return_val
-endfunction
+" function! MyDetectCursorChangeLine()
+"   if !exists('b:current_line')
+"     let b:current_line = line('.')
+"   endif
+"   let l:return_val = b:current_line != line('.')
+"   let b:current_line = line('.')
+"   return l:return_val
+" endfunction
 
-function! MyQfCurrentLineFilePreview(grep_pattern)
-  let l:target_quickfix = getqflist()[line('.') - 1]
-  let l:buffer_number = l:target_quickfix['bufnr']
-  let l:target_line = l:target_quickfix['lnum']
-  autocmd SwapExists * let v:swapchoice='o'
-  silent execute 'pedit +setlocal\ nowinfixheight|setlocal\ cursorline|' . l:target_line . '|normal\ zz ' . bufname(l:buffer_number)
-  autocmd! SwapExists
-  call lightline#update()
-  let @/ = a:grep_pattern
-  setlocal cursorline
-  highlight CursorLineNr ctermfg=228
-  highlight CursorLine ctermbg=236
-endfunction
+" function! MyQfCurrentLineFilePreview(grep_pattern)
+"   let l:target_quickfix = getqflist()[line('.') - 1]
+"   let l:buffer_number = l:target_quickfix['bufnr']
+"   let l:target_line = l:target_quickfix['lnum']
+"   autocmd SwapExists * let v:swapchoice='o'
+"   silent execute 'pedit +setlocal\ nowinfixheight|setlocal\ cursorline|' . l:target_line . '|normal\ zz ' . bufname(l:buffer_number)
+"   autocmd! SwapExists
+"   call lightline#update()
+"   let @/ = a:grep_pattern
+"   setlocal cursorline
+"   highlight CursorLineNr ctermfg=228
+"   highlight CursorLine ctermbg=236
+" endfunction
 
 " agit -----------------------------------------------------------------
-let g:agit_stat_width = 130
+" let g:agit_stat_width = 130
 
 " vim-markdown -----------------------------------------------------------------
 let g:markdown_enable_spell_checking = 0
@@ -633,16 +633,16 @@ let g:markdown_enable_spell_checking = 0
 let g:loaded_matchparen = 1
 
 " vim-multiple-cursors -----------------------------------------------------------------
-" Called once right before you start selecting multiple cursors
-function! Multiple_cursors_before()
-  if exists(':NeoCompleteLock')==2
-    exe 'NeoCompleteLock'
-  endif
-endfunction
+" " Called once right before you start selecting multiple cursors
+" function! Multiple_cursors_before()
+"   if exists(':NeoCompleteLock')==2
+"     exe 'NeoCompleteLock'
+"   endif
+" endfunction
 
-" Called once only when the multiple selection is canceled (default <Esc>)
-function! Multiple_cursors_after()
-  if exists(':NeoCompleteUnlock')==2
-    exe 'NeoCompleteUnlock'
-  endif
-endfunction
+" " Called once only when the multiple selection is canceled (default <Esc>)
+" function! Multiple_cursors_after()
+"   if exists(':NeoCompleteUnlock')==2
+"     exe 'NeoCompleteUnlock'
+"   endif
+" endfunction
