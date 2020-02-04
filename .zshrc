@@ -301,6 +301,10 @@ function agv() {
 export SVN_EDITOR=vim
 # export LESS='-g -i -j10 -R -Q'
 export LESS='-i -R -S -Q'
+if [[ $OSTYPE == 'darwin'* ]]; then
+    # tarコマンドでリソースフォーク(._*)を除外する
+    export COPYFILE_DISABLE=1
+fi
 
 ### アプリケーション固有設定 ############################################################
 # for rbenv
