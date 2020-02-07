@@ -55,6 +55,7 @@ mkdir -p ~/bin
 ln -sf ~/dotfiles/bin/git-diff-normal-format ~/bin/git-diff-normal-format
 ln -sf ~/dotfiles/bin/git-foresta ~/bin/git-foresta
 ln -sf ~/dotfiles/bin/rubocop ~/bin/rubocop
+ln -sf ~/dotfiles/bin/noah-firm-cp ~/bin/noah-firm-cp
 ln -sf ~/dotfiles/bin/noah-firm-up ~/bin/noah-firm-up
 ln -sf ~/dotfiles/bin/tmux-history-bytes ~/bin/tmux-history-bytes
 

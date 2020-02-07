@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'optparse'
+
+DEST_HOST = '10.30.139.3'
+DEST_USER = 'takaaki'
+DEST_DIR = '~/Downloads/Noah-firm'
+NOAH2_REPO_DIR = '/home/tkasai/git-work/c2-noah2'
+NOAH3_REPO_DIR = '/home/tkasai/git-work/seap.noah'
+
+is_all = false
+opt = OptionParser.new
+opt.on('--all', 'Copy not only firmware but all files in build/rel directory') { is_all = true }
+opt.parse!(ARGV)
+
+noah2_firm_dir = "#{NOAH2_REPO_DIR}/build/rel"
+noah3_firm_dir = "#{NOAH3_REPO_DIR}/build/rel"
+
+command = +'rsync -Pav -e ssh --ignore-existing --delete'
+command << ' --include="*.bin" --exclude="*"' unless is_all
+command << " #{noah2_firm_dir}/ #{noah3_firm_dir}/ #{DEST_USER}@#{DEST_HOST}:#{DEST_DIR}"
+
+exec command
