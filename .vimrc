@@ -348,7 +348,7 @@ if dein#load_state('~/.vim/bundle')
   " call dein#add('thinca/vim-qfreplace')
   call dein#add('gabrielelana/vim-markdown')
   call dein#add('vim-scripts/AnsiEsc.vim')
-  call dein#add('itchyny/vim-parenmatch')
+  " call dein#add('itchyny/vim-parenmatch')
   call dein#add('itchyny/vim-cursorword')
   " call dein#add('terryma/vim-multiple-cursors')
 
@@ -393,6 +393,8 @@ augroup my_highlight_search
   autocmd OptionSet diff call MyHighlightSearch()
 augroup END
 call MyHighlightSearch()
+" 対応する括弧の色
+highlight MatchParen cterm=bold ctermfg=15 ctermbg=11
 " ビジュアルモードの色
 highlight Visual cterm=reverse ctermfg=none ctermbg=none
 " vimdiffの色設定
@@ -630,7 +632,7 @@ endif
 let g:markdown_enable_spell_checking = 0
 
 " vim-parenmatch -----------------------------------------------------------------
-let g:loaded_matchparen = 1
+" let g:loaded_matchparen = 1
 
 " vim-multiple-cursors -----------------------------------------------------------------
 " " Called once right before you start selecting multiple cursors
