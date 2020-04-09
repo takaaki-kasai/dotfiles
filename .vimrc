@@ -337,10 +337,11 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
   call dein#add('altercation/vim-colors-solarized')
   call dein#add('itchyny/lightline.vim')
+  call dein#add('itchyny/vim-gitbranch')
   call dein#add('othree/eregex.vim')
   call dein#add('othree/html5.vim')
   " call dein#add('kchmck/vim-coffee-script')
-  call dein#add('tpope/vim-fugitive')
+  " call dein#add('tpope/vim-fugitive')
   call dein#add('scrooloose/syntastic')
   call dein#add('tyru/caw.vim.git')
   call dein#add('rickhowe/diffchar.vim')
@@ -419,7 +420,7 @@ let g:lightline = {
       \   'colorscheme': 'solarized',
       \   'mode_map': { 'c': 'NORMAL' },
       \   'active': {
-      \     'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
+      \     'left': [ [ 'mode', 'paste' ], [ 'gitbranch', 'filename' ] ],
       \     'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'filetype', 'fileencoding' ] ]
       \   },
       \   'inactive': {
@@ -431,7 +432,7 @@ let g:lightline = {
       \   },
       \   'component_function': {
       \     'mode': 'MyMode',
-      \     'fugitive': 'MyFugitive',
+      \     'gitbranch': 'MyGitBranch',
       \     'filename': 'MyFilename',
       \     'readonly': 'MyReadonly',
       \     'modified': 'MyModified',
@@ -494,9 +495,9 @@ function! MyFilename()
         \ ('' != MyModified() ? ' ' . MyModified() : '')
 endfunction
 
-function! MyFugitive()
-  if &ft !~? 'vimfiler\|gundo' && exists("*fugitive#head")
-    let _ = fugitive#head()
+function! MyGitBranch()
+  if &ft !~? 'vimfiler\|gundo' && exists("*gitbranch#name")
+    let _ = gitbranch#name()
     return strlen(_) ? "\ue0a0 "._ : ''
   endif
   return ''
