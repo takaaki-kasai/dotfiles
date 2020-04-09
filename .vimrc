@@ -16,6 +16,8 @@ set wrapscan        " 最後までいったら最初に戻る
 set hlsearch        " 検索文字をハイライト
 " ハイライトを消す
 nnoremap <silent> <Leader>q :nohlsearch<CR>
+" パターンマッチングに使えるメモリ最大値
+set maxmempattern=10000
 
 " インデント系 ------------------------------------------------------
 set expandtab                 " タブを挿入時にスペースに変換
