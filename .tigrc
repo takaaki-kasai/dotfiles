@@ -30,6 +30,7 @@ bind main t view-refs
 bind main w view-tree
 bind main G move-last-line
 bind main F none
+bind main H view-help
 bind main fa !sh -c "echo 'Fetching...'; git fetchall"
 # bind main pa !?sh -c "echo 'Pushing...'; git pushall %(branch)"
 bind main pm !?sh -c "echo 'Pushing...'; git pushmulti %(prompt Remotes to push [comma separated]: ) %(branch)"
