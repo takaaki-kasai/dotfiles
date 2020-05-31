@@ -169,11 +169,10 @@ esac
 function my_accept_line() {
     # プロンプトにgit状態も表示されている場合、git状態の表示を消す
     if [[ ${#PROMPT} -ne ${#BASE_PROMPT} ]]; then
-        # 先に消すとちらつくので、表示したい内容で上書きしてから余計な部分を消す
-        print -n $'\e[s\e[F' # カーソル位置を保存し、前の行の先頭に移動
-        print -Pn "$BASE_PROMPT" # BASE_PROMPTを表示
-        print -Rn "$BUFFER" # 入力内容を再表示
-        print -n $'\e[K\e[E\e[2K\e[u\e[A' # カーソルより後ろを消し、次の行に移動して行全体を消し、保存したカーソル位置に戻り、カーソル位置を1行上に移動
+        local saved_prompt=$PROMPT
+        PROMPT=$BASE_PROMPT
+        zle reset-prompt
+        PROMPT=$saved_prompt
     fi
     zle accept-line
 }
