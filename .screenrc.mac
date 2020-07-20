@@ -1,0 +1,9 @@
+# macOS用 .screenrc
+termcapinfo xterm* ti@:te@
+defscrollback 8192            # スクロールバッファ 8192行
+defutf8 on
+defkanji utf-8
+encoding utf-8 utf-8
+defencoding utf-8
+caption always '%{= kd} %=screen%= '
+escape ^t^t # 発動をデフォルトのCtrl+aからCtrl+tに変更

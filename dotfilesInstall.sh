@@ -43,7 +43,7 @@ ln -sf ~/dotfiles/.gvimrc ~/.gvimrc
 ln -snf ~/dotfiles/.vim ~/.vim
 ln -sf ~/dotfiles/.dir_colors ~/.dir_colors
 ln -sf ~/dotfiles/.colordiffrc ~/.colordiffrc
-ln -sf ~/dotfiles/.screenrc ~/.screenrc
+# ln -sf ~/dotfiles/.screenrc ~/.screenrc
 ln -sf ~/dotfiles/.tigrc ~/.tigrc
 ln -sf ~/dotfiles/.tigrc.vim ~/.tigrc.vim
 ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf
@@ -69,10 +69,12 @@ if [ $(uname) = 'Darwin' ]; then
     cp ~/dotfiles/.config/karabiner/assets/complex_modifications/$rule ~/.config/karabiner/assets/complex_modifications/$rule
   done
   ln -snf ~/dotfiles/.hammerspoon ~/.hammerspoon
+  ln -sf ~/dotfiles/.screenrc.mac ~/.screenrc
 elif [ $(uname) = 'Linux' ]; then
   # Linux用のコード
   git config --global core.editor 'vim'
   git config --global diff.tool 'vimdiff'
+  ln -sf ~/dotfiles/.screenrc ~/.screenrc
 fi
 
 if [ -x "$(which git)" ] && [ ! -e ~/.vim/bundle/repos/github.com/Shougo/dein.vim ]; then
