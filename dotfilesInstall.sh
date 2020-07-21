@@ -70,6 +70,7 @@ if [ $(uname) = 'Darwin' ]; then
   done
   ln -snf ~/dotfiles/.hammerspoon ~/.hammerspoon
   ln -sf ~/dotfiles/.screenrc.mac ~/.screenrc
+  ln -sf ~/dotfiles/bin/vpnssh ~/bin/vpnssh
 elif [ $(uname) = 'Linux' ]; then
   # Linux用のコード
   git config --global core.editor 'vim'
