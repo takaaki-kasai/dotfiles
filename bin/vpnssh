@@ -24,6 +24,8 @@ while true; do
   if isnt_connected "$vpn"; then
     echo "$(date '+%Y-%m-%d %H:%M:%S %z') Trying to connect to $vpn"
     /usr/sbin/scutil --nc start "$vpn" --secret $(echo -n $enc_sec | base64 -d | gunzip -c)
+  else
+    echo "$(date '+%Y-%m-%d %H:%M:%S %z') Already connected to $vpn"
   fi
 
   if poll_until_connected "$vpn"; then
