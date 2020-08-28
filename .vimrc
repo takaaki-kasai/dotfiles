@@ -331,7 +331,7 @@ if dein#load_state('~/.vim/bundle')
 
   " Add or remove your plugins here:
   call dein#add('vim-scripts/matchit.zip')
-  call dein#add('Shougo/neocomplete.vim')
+  " call dein#add('Shougo/neocomplete.vim')
   call dein#add('Shougo/unite.vim')
   call dein#add('Shougo/vimfiler.vim')
   call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
@@ -530,7 +530,7 @@ let g:eregex_backward_delim = '?'
 let g:eregex_replacement = 3
 
 " neocomplete -----------------------------------------------------------------
-source ~/.vim/_neocomplete
+" source ~/.vim/_neocomplete
 
 " unite.vim -----------------------------------------------------------------
 " 入力モードで開始する
