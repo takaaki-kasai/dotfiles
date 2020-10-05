@@ -1,0 +1,2 @@
+#!/bin/sh
+scp -o 'ProxyCommand ssh -W %h:%p takaaki@192.168.33.11' tkasai@tkasai-dev09:git-work/c2-noah2/build/rel/\*.bin ~/Downloads/
