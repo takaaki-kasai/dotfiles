@@ -107,6 +107,9 @@ let &t_EI.="\e[2 q"
 inoremap <ESC> <ESC>
 " Bracketed Paste の無効化(挙動が気に入らないので)
 set t_BE=
+" modifyOtherKeys の無効化(入力言語切替Ctrl+Shift+JおよびCtrl+Shift+:のため)
+let &t_TI=''
+let &t_TE=''
 
 " 自動インデントさせずに貼り付けるための挿入モード
 nnoremap <Space>i :<C-u>set paste<Return>i
