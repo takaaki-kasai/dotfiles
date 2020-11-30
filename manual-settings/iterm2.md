@@ -20,8 +20,9 @@
 
 * Transparency: 最小
 * Blur: 最大
-* Columns: 160 (Note PC: 120)
-* Rows: 50 (Note PC: 35)
+* Columns: 160 (Note PC: 100)
+* Rows: 50 (Note PC: 30)
+* Custom window title: \(number): \(currentTab.title)
 
 ## Terminal
 
