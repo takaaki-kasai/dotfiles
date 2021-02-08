@@ -31,7 +31,7 @@ filetype indent on            " インデント機能をオン
 
 " 表示系 ------------------------------------------------------------
 syntax on                                        " 色分けを有効に
-set listchars=tab:￫\ ,trail:⋅                    " 特殊文字の代替文字(タブと行末のスペース) U+ffeb U+22C5
+set listchars=tab:￫\ ,trail:⋅,nbsp:⍽             " 特殊文字の代替文字(タブと行末のスペース),extends:»,precedes:«
 set guioptions-=T                                " ツールバーを非表示
 set cmdheight=1                                  " コマンドラインの高さ (Windows用gvim使用時はgvimrcを編集すること)
 set number                                       " 行番号を表示
@@ -381,7 +381,11 @@ set background=dark
 colorscheme solarized
 " 全角スペースの色
 highlight ZenkakuSpace cterm=underline ctermfg=11
-match ZenkakuSpace /　/  " スラッシュの間に全角スペース
+" match ZenkakuSpace /　/  " スラッシュの間に全角スペース
+call matchadd('ZenkakuSpace', '\%u3000')
+" Unicodeで指定可能なホワイトスペース類の色
+highlight UnicodeSpaces cterm=underline ctermfg=11 ctermbg=0
+call matchadd('UnicodeSpaces', '\%u180E\|\%u2000\|\%u2001\|\%u2002\|\%u2003\|\%u2004\|\%u2005\|\%u2006\|\%u2007\|\%u2008\|\%u2009\|\%u200A\|\%u2028\|\%u2029\|\%u202F\|\%u205F')
 " タブなどの色
 highlight SpecialKey cterm=none ctermfg=10 ctermbg=none
 " 改行などの色
