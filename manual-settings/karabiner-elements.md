@@ -10,10 +10,10 @@
 
 ### Complex Modifications
 
-* PC-Style Copy/Paste/Cut
-* PC-Style Undo
 * Emacs key bindings [control+keys] (customized C-aehdpnbf[])
-* Change alt+spacebar to spacebar
+* (Optional) PC-Style Copy/Paste/Cut
+* (Optional) PC-Style Undo
+* (Optional) Change alt+spacebar to spacebar
 
 ### Misc
 
