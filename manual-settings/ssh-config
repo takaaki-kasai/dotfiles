@@ -1,0 +1,5 @@
+ServerAliveInterval 300
+ServerAliveCountMax 12
+
+Match host tkasai-*,10.30.*,!10.30.139.3 !exec "ifconfig | grep -q '^\s*inet 10.30.'"
+  ProxyCommand ssh -W %h:%p takaaki@192.168.33.11
