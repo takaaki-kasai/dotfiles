@@ -316,6 +316,9 @@ let g:PHP_vintage_case_default_indent = 1
 " メソッド呼び出しの -> の最初のハイフンが単語と認識されないようにハイフンは除外
 autocmd FileType php setlocal iskeyword-=-
 
+" Ruby用の設定
+let g:ruby_indent_assignment_style = 'variable'
+
 " dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
