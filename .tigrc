@@ -4,7 +4,7 @@ source ~/.tigrc.vim
 # generic なキーバインド
 bind generic b none
 bind generic cc !?sh -c "echo 'Commit...'; git commit"
-bind generic ca !?sh -c "echo 'Amending previous commit...'; git commit --amend"
+bind generic ca !?sh -c "echo 'Amending previous commit...'; git commit --amend --date=now"
 bind generic ap !?sh -c "echo 'Add patch...'; git add -p"
 bind generic s none
 bind generic d none
@@ -49,8 +49,8 @@ bind main mm !?git merge --no-ff %(branch)
 bind main mr !?git merge --no-ff "%(prompt Remote to merge: )/%(branch)"
 bind main mf !@?git merge --ff-only %(commit)
 bind main mt !sh -c "echo 'Testing for merge %(branch)...'; git mergetest %(branch)"
-bind main BB !@?git rebase -p %(commit)
-bind main BD !@?git rebase --ignore-date %(commit)
+bind main BB !@?git rebase --ignore-date %(commit)
+# bind main BD !@?git rebase --ignore-date %(commit)
 bind main BI !?sh -c "echo 'Starting interactive rebase...'; git rebase -i %(commit)"
 bind main cp !@?git cherry-pick %(commit)
 bind main ddu :!git diff -M100% -C100%
